@@ -1,5 +1,4 @@
 # requests 사용 스크랩핑
-
 import requests
 
 # 세션 활성화
