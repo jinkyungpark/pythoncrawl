@@ -59,7 +59,7 @@ print(img_list)
 
 i=0
 for v in img_list:     # find() 는 enumrate() 방식을 사용 못하는 걸로 나옴
-    img_t = v.find('img')    
+    img_t = v.find('img')    # 하나만 가져오기 때문
     #print(img_t.attrs['data-source'])   
     i +=1
     # 저장 파일명 및 경로
