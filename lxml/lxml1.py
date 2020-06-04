@@ -1,5 +1,4 @@
 # lxml 사용 기초 스크랩핑(1)
-
 import requests
 import lxml.html
 
@@ -17,6 +16,10 @@ def main():
     # 으로 가져올 것인지 처리
 
     response = requests.get("https://www.naver.com")
+    # print(response)  # <Response [200]>
+    # print(response.text)   # 가져온 페이지 전체 출력
+    print(response.text[:1000])  # 1000개만 가져오기
+    # print(response.content[:1000])  # 1000개만 가져오기
 
     # 신문사 링크 리스트 획득
     urls = scrape_news_list_page(response)
@@ -35,7 +38,10 @@ def scrape_news_list_page(res):
 
     # 태그 정보 문자열 저장
     root = lxml.html.fromstring(res.content)
+    # print(root)   #<Element html at 0x1fd32433180>
 
+    # html로 온 문서에 대해서 css 선택자로 원하는 부분 찾기
+    # cssselect 는 설치한 라이브러리에서 가져옴
     for a in root.cssselect('.api_list .api_item a.api_link'):
         # 링크
         url = a.get('href')
