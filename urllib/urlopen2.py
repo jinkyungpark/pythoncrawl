@@ -1,4 +1,5 @@
 # urlopen 함수기초 사용법
+# 앞에서 urlretrieve 로 했던 작업을 urlopen 으로 실행
 
 import urllib.request as req
 # 웹에서 발생할 수 있는 에러를 처리하기 위한 두 개의 객체 가져오기
@@ -19,7 +20,8 @@ for i, url in enumerate(target_url):
         # 웹 수신 정보 읽기
         response = req.urlopen(url)
 
-        # 수신 내용
+        # 수신 내용 읽어오기
+        # 이전 예제에서 읽어올 바이트수 지정했던 것과 같은 형태
         contents = response.read()
 
         print("-----------------------------------------------------")
@@ -34,7 +36,7 @@ for i, url in enumerate(target_url):
         with open(path_list[i], 'wb') as c:
             c.write(contents)
 
-    except HTTPError as e:
+    except HTTPError as e:  # 파일 다운로드 시 발생할 수 있는 에러
         print("Download Failed")
         print("HttpError code : ", e.code)
     except URLError as e:

@@ -1,10 +1,11 @@
 # 파이썬 크롤링 기초
 # urllib 사용법 및 기본 스크랩핑
+# urlretrieve : 파일 직접 다운로드
 
 import urllib.request as req
 
 # 파일 URL
-img_url = 'http://cafefiles.naver.net/20120611_289/kkas_nknk55_1339391180925I3qnD_JPEG/%B0%ED%BE%E7%C0%CC9.jpg'
+img_url = 'http://blogfiles.naver.net/20100615_12/kkchblue_12765686609822pxfs_jpg/%B0%AD%BE%C6%C1%F6_kkchblue.jpg'
 # 구글 메인 페이지 소스 다운로드 하기
 html_url = 'http://google.com'
 
@@ -33,4 +34,3 @@ else:
 
     # 성공
     print('Download Succeed')
-
