@@ -12,7 +12,7 @@ import json
 
 # 세션 활성화 및 json 데이터 요청 / 인코딩 확인 후 set하기
 # with requests.Session() as s:
-#     r = s.get('https://httpbin.org/stream/10', stream=True)
+#     r = s.get('https://httpbin.org/stream/10', stream=True)   # stream + True 는 Raw Response Content 인경우 사용하라고 되어 있음
 #     print("encoding:{}".format(r.encoding))   # encoding 이 None 임
 #     if r.encoding is None:
 #         r.encoding = 'UTF-8'
