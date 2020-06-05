@@ -36,12 +36,9 @@ for i, url in enumerate(target_url):
         with open(path_list[i], 'wb') as c:
             c.write(contents)
 
-    except HTTPError as e:  # 파일 다운로드 시 발생할 수 있는 에러
+    except HTTPError as e:  # urlopen() 에서 발생할 수 있는 에러
         print("Download Failed")
         print("HttpError code : ", e.code)
-    except URLError as e:
-        print("Download Failed")
-        print("URL Error code : ", e.reason)
     # 성공
     else:
         print()
