@@ -33,6 +33,8 @@ for i, url in enumerate(target_url):
         print("-----------------------------------------------------")
 
         # 파일 저장 : w(write), b(byte)
+        # urlopen().read() 는 저장하는 기능은 아니기 때문에 읽어온 대상을
+        # 저장하기 위한 구문
         with open(path_list[i], 'wb') as c:
             c.write(contents)
 

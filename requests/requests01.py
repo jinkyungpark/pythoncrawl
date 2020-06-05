@@ -2,6 +2,8 @@
 import requests
 
 # 세션 활성화
+# 여러번의 requests 요청시 같은 host 를 유지할 수 있고
+# 같은 TCP connection 이용
 s = requests.Session()
 # 세션을 이용해 요청
 r = s.get('https://www.naver.com')

@@ -22,6 +22,7 @@ print(params)
 
 # 연속해서 4번 요청
 for c in params:
+    # 파라메터로 붙는 부분에 대해 인코딩 처리
     param = urllib.parse.urlencode(c)
 
     # url 완성
@@ -39,4 +40,3 @@ for c in params:
     # 출력하기
     print("-"*100)
     print(contents)
-
