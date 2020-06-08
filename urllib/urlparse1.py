@@ -16,7 +16,7 @@ values = {
     'format': 'json'
 }
 print('before param : {}'.format(values))
-params = urllib.parse.urlencode(values)
+params = urllib.parse.urlencode(values)  # url로 쿼리문 전송시 인코딩
 print('after param : {}'.format(params))
 
 # 요청 url 생성

@@ -3,6 +3,7 @@ import requests
 # 세션 활성화
 s = requests.Session()
 # 세션을 이용해 요청
+# 브라우저가 가지고 있는 cookies 값 붙여서 보내는 예제
 r = s.get('https://httpbin.org/cookies', cookies={'name': 'hong'})
 # 리턴된 쿠키 출력
 print(r.text)
