@@ -18,7 +18,7 @@ chrome_options.add_argument("--headless")
 browser = webdriver.Chrome(
     "./webdriver/chrome/chromedriver.exe", options=chrome_options)
 
-# -------------------------- 확인(브라우저가 안 뜨는지 확인)
+# -------------------------- 확인(브라우저가 안 뜨는지 확인 : 일반모드)
 
 # browser = webdriver.Chrome("./webdriver/chrome/chromedriver.exe")
 
@@ -64,7 +64,7 @@ taget_crawl_num = 7
 
 
 while cur_page <= taget_crawl_num:
-    # ------------------------------------------ 페이지 나누기
+
     soup = BeautifulSoup(browser.page_source, 'html.parser')
     # print(soup.prettify())
 
@@ -112,7 +112,7 @@ while cur_page <= taget_crawl_num:
         print("Crawling 성공")
         break
 
-    # 다음 페이지 번호 클릭하는 부분
+    # 다음 페이지 번호 클릭하는 부분(XPATH 로는 에러남)
     WebDriverWait(browser, 2).until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.number_wrap > a:nth-child({})'.format(cur_page)))).click()
 
@@ -121,7 +121,5 @@ while cur_page <= taget_crawl_num:
 
     # 3초간 대기
     time.sleep(3)
-
-
 # 브라우저 종료
 browser.close()
