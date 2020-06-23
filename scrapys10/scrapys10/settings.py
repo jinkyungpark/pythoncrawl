@@ -9,10 +9,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapys09'
+BOT_NAME = 'scrapys10'
 
-SPIDER_MODULES = ['scrapys09.spiders']
-NEWSPIDER_MODULE = 'scrapys09.spiders'
+SPIDER_MODULES = ['scrapys10.spiders']
+NEWSPIDER_MODULE = 'scrapys10.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -63,9 +63,9 @@ DOWNLOAD_DELAY = 1
 # }
 
 # Configure item pipelines
-# 여러 개의 파이프 라인이 있을 때 숫자가 작을 수록 우선순위가 높음
+# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapys09.pipelines.Scrapys09Pipeline': 300,
+    'scrapys10.pipelines.Scrapys10Pipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
