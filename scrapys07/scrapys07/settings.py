@@ -108,16 +108,6 @@ FEEDS = {
         'encoding': 'utf8',
     },
 }
-# FEED_URI = 'result.jl'
-
-# 파일 형식
-# FEED_FORMAT = "jsonlines"
-
-# 출력 인코딩
-# FEED_EXPORT_ENCODING = "utf-8"
-
-# 기본 들여쓰기
-# FEED_EXPORT_INDENT = 0
 
 # 저장소, 저장 형식 관련 레퍼런스
 # https://docs.scrapy.org/en/latest/topics/feed-exports.html#settings
