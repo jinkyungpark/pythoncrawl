@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'scrapyproject1.spiders'
 
 
 # user-agent 설정
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -29,6 +29,14 @@ COOKIES_ENABLED = True
 # Referer 삽입
 DEFAULT_REQUEST_HEADERS = {
     'Referer': 'https://news.daum.net/'
+}
+
+# user-agent Middle Wares 사용
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
+    'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
 }
 
 # 재시도 횟수
