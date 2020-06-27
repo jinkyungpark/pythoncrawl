@@ -9,7 +9,8 @@ from scrapy.spiders import CrawlSpider, Rule
 
 
 class NewsSpider(CrawlSpider):
-    name = 'news'
+
+    name = 'newsbot'
     allowed_domains = ['news.daum.net']
     start_urls = ['https://news.daum.net/breakingnews/digital']
 
@@ -17,23 +18,25 @@ class NewsSpider(CrawlSpider):
     # page=\d$(한자리 수)
     # page=\d+  연속, follow=True
     rules = [
-        # \d$ 로 끝났으니 1~9까지만 크롤링
+        # 한자리수 이상의 페이지 크롤링을 위해서
         # Rule(LinkExtractor(allow=r'/breakingnews/digital\?page=\d+'),
         #      callback='parse_headline', follow=True)
-
         Rule(LinkExtractor(allow=r'/breakingnews/digital\?page=\d$'),
              callback='parse_headline')
     ]
 
+    # 시작 페이지에 대해서는 안해주는 상황임
+    def parse_start_url(self, response):
+        return self.parse_headline(response)
+
     def parse_headline(self, response):
         # print(response)
-        # URL 로깅
         self.logger.info('Response URL : %s' % response.url)
 
-        for m in response.css('ul.list_news2 > li > div'):
+        for m in response.css('ul.list_news2.list_allnews > li > div'):
             # 헤드라인
             headline = m.css(
-                'strong.tit_thumb > a::text').extract_first().strip()
+                'strong > a::text').extract_first().strip()
             # 본문 20글자
             contents = m.css('div > span::text').extract_first().strip()
             yield {'headline': headline, 'contents': contents}

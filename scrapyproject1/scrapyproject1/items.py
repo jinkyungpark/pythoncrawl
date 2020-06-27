@@ -11,9 +11,4 @@ import scrapy
 class ArticleItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    # 기사제목
-    headline = scrapy.Field()
-    # 기사 본문
-    contents = scrapy.Field()
-    # 요청 리스트 페이지
-    parent_link = scrapy.Field()
+    pass
