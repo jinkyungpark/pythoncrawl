@@ -1,5 +1,4 @@
 # BeautifulSoup 사용 스크랩핑 - 이미지 다운로드
-# find_all 사용하기
 
 import os
 import urllib.parse as rep
@@ -53,21 +52,25 @@ else:
 soup = BeautifulSoup(res,"html.parser")
 
 # print(soup.prettify())    # 확인용임
-#  
-img_list = soup.find_all("a", class_="thumb _thumb")
+
+
+#  a.thumb._thumb > img
+img_list = soup.select('div.img_area > a.thumb._thumb > img')
 print(img_list)
 
-i=0
-for v in img_list:     # find() 는 enumrate() 방식을 사용 못하는 걸로 나옴
-    img_t = v.find('img')    # 하나만 가져오기 때문
-    #print(img_t.attrs['data-source'])   
-    i +=1
+
+# 반복문을 사용하여 이미지 경로 가져오기
+for i, img in enumerate(img_list, 1):
+    # 속성확인
+    print()
+    print()
+    print(img['data-source'], i)
     # 저장 파일명 및 경로
-    fullfileName = os.path.join(savePath,savePath+str(i)+'.png')
+    fullfileName = os.path.join(savePath, savePath+str(i)+'.png')
+    # 파일명 확인
+    # print(fullfileName)
+
+
     # 다운로드 요청(url, 다운로드 경로)
-    req.urlretrieve(img_t.attrs['data-source'],fullfileName)
-
-
-
-        
+    req.urlretrieve(img['data-source'],fullfileName)
 

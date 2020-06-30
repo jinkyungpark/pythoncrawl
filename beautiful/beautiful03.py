@@ -1,76 +1,128 @@
-# BeautifulSoup 사용 스크랩핑 - 이미지 다운로드
+# beautifulsoup 사용
+# 스크랩핑 도구로 유명함
 
-import os
-import urllib.parse as rep
-import urllib.request as req
-from fake_useragent import UserAgent
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  # beautifulsoup4
 
-# Header 정보 초기화
-opener = req.build_opener()
-# User-Agent 정보
-opener.addheaders = [('User-Agent', UserAgent().ie)]
-# Header 정보 삽입
-req.install_opener(opener)
+# html 변수에 들어있는 값이 예를 들어 웹에서 가져온 소스라고 할 때
 
-# 네이버 이미지 기본 URL(크롬 개발자)
-base = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query='
-# 검색어
-quote = rep.quote_plus('호랑이')
-# URL 완성
-url = base + quote
+html = """
+    <html>
+        <head>
+            <title>The Dormouse's story</title>
+        </head>
+        <body>
+            <h1>this is h1 area</h1>
+            <h2>this is h2 area</h2>
+            <p class='title'><b>The Dormouse's story</b></p>
+            <p class='story'>Once upon a time there were three little sistes.
+                <a href='http://example.com/elsie' class='sister' id='link1'>Elsie</a>
+                <a href='http://example.com/lacie' class='sister' id='link2'>Lacie</a>
+                <a data-io="link3" href='http://example.com/little' class='sister' id='link3'>Title</a>
+            </p>
+            <p class='story'>
+                story.....
+            </p>
+        </body>
+    </html>
+"""
 
-# 요청 URL 확인
-print('Request URL : {}'.format(url))
+# Beautifulsoup 단계
+# bs4 초기화 - 웹에서 가져온 문서를 첫번째 인자로, 문서의 구조를 두번째 인자로
+soup = BeautifulSoup(html, 'html.parser')
 
-# Request
-res = req.urlopen(url)
+# a 태그 찾기
+a = soup.find_all('a')
+print(a)
 
-# 이미지 저장 경로
-savePath = "c:\\imagedown\\"
+# a 태그가 여러개 있을 경우 앞에서 2개만 가져오기
+print()
+a = soup.find_all('a', limit=2)
+print(a)
 
-# 폴더 생성 예외 처리(문제 발생 시 )
-try:    
-    # 기본 폴더가 있는지 체크
-    if not (os.path.isdir(savePath)):
-        #없으면 폴더 생성
-        os.makedirs(os.path.join(savePath))
-except OSError as e:
-    # 에러 내용
-    print('folder creation failed')
-    print('folder name : {}'.format(e.filename))
+# a 태그가 많다면 find_all() 이 너무 많을 수 있기는 함
 
-    # 런타임 에러
-    raise RuntimeError("System Exit")
-else:
-    # 폴더 생성이 되었거나, 존재할 경우
-    print("folder is created!")
+# 태그가 가지고 있는 속성 값으로 가져오기
 
+# 클래스 이름으로 가져오기
+print()
+link2 = soup.find_all("a", class_='sister')
+print(link2)
 
+# 텍스트 노드 값이 Elsie인 것 찾아오기
+print()
+link2 = soup.find_all("a", string=["Elsie"])
+print(link2)
 
-# bs4 초기화
-soup = BeautifulSoup(res,"html.parser")
-
-# print(soup.prettify())    # 확인용임
-
-
-#  a.thumb._thumb > img
-img_list = soup.select('div.img_area > a.thumb._thumb > img')
-print(img_list)
-
-
-# 반복문을 사용하여 이미지 경로 가져오기
-for i, img in enumerate(img_list, 1):
-    # 속성확인
-    print()
-    print()
-    print(img['data-source'], i)
-    # 저장 파일명 및 경로
-    fullfileName = os.path.join(savePath, savePath+str(i)+'.png')
-    # 파일명 확인
-    # print(fullfileName)
+# 텍스트 노드가 Elsie인 노드와 Title인 것 가져오기
+print()
+link2 = soup.find_all("a", string=["Elsie", "Title"])
+print(link2)
 
 
-    # 다운로드 요청(url, 다운로드 경로)
-    req.urlretrieve(img['data-source'],fullfileName)
+# 처음 발견한 a 태그 선택
+link3 = soup.find("a")
+print()
+print(link3)
+print(link3.string)  # 문자열 출력
+print(link3.text)   # 문자열 출력
 
+# 다중조건
+link4 = soup.find("a", {"class": "sister", "data-io": "link3"})
+print()
+print(link4)
+
+
+# css 선택자 : select, select_one 이용하기
+# 태그 선택자 : find, find_all
+# select / select_one
+# 태그 + 클래스 + 자식 선택자
+link5 = soup.select_one('p.title > b')
+print()
+print(link5)
+print(link5.string)
+print(link5.text)
+
+# id가 link1인 태그 가져오기
+link6 = soup.select_one("a#link1")
+print()
+print(link6)
+print(link6.string)
+print(link6.text)
+
+# 속성을 이용하여 태그 가져오기
+link7 = soup.select_one("a[data-io='link3']")
+print()
+print(link7)
+print(link7.string)
+print(link7.text)
+
+# 전체 선택
+link8 = soup.select("p.story > a")
+print()
+print(link8)
+# print(link8.string) 여러개를 가지고 오기 때문에 에러남
+# print(link8.text)
+
+
+# a 태그 두번째
+link9 = soup.select('p.story > a:nth-of-type(2)')
+print()
+print('link9', link9)
+
+# p.story 를 가진 게 두 개가 있음
+link10 = soup.select('p.story')
+print()
+print(link10)
+
+
+# 위의 예에서 만일 string 출력을 하고 싶다면?
+for t in link10:
+    temp = t.find_all('a')
+
+    if temp:
+        for v in temp:
+            print('>>>>>', v)
+            print('>>>>>', v.string)
+    else:
+        print('-----', t)
+        print('-----', t.string)

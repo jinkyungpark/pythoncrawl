@@ -1,6 +1,5 @@
 # beautifulsoup 사용
 # 스크랩핑 도구로 유명함
-
 from bs4 import BeautifulSoup  # beautifulsoup4
 
 # html 변수에 들어있는 값이 예를 들어 웹에서 가져온 소스라고 할 때
@@ -30,99 +29,54 @@ html = """
 # bs4 초기화 - 웹에서 가져온 문서를 첫번째 인자로, 문서의 구조를 두번째 인자로
 soup = BeautifulSoup(html, 'html.parser')
 
-# a 태그 찾기
-a = soup.find_all('a')
-print(a)
+# 타입확인
+print('soup', type(soup))  # soup <class 'bs4.BeautifulSoup'>
+print('soup', soup.prettify())
 
-# a 태그가 여러개 있을 경우 앞에서 2개만 가져오기
+
+# h1 태그 접근
 print()
-a = soup.find_all('a', limit=2)
-print(a)
+h1 = soup.html.body.h1
+print(h1)
 
-# a 태그가 많다면 find_all() 이 너무 많을 수 있기는 함
-
-# 태그가 가지고 있는 속성 값으로 가져오기
-
-# 클래스 이름으로 가져오기
+# 첫번째 p 태그 접근
 print()
-link2 = soup.find_all("a", class_='sister')
-print(link2)
+p1 = soup.html.body.p
+print(p1)
 
-# 텍스트 노드 값이 Elsie인 것 찾아오기
+# 두번째 p 태그 접근
+# next_sibling : p 태그 다음의 공백 의미
 print()
-link2 = soup.find_all("a", string=["Elsie"])
-print(link2)
+p2 = p1.next_sibling.next_sibling
+print(p2.prettify())
 
-# 텍스트 노드가 Elsie인 노드와 Title인 것 가져오기
+
+# 학생들 실습 - 세번째 p 태그 접근
 print()
-link2 = soup.find_all("a", string=["Elsie", "Title"])
-print(link2)
+p3 = p2.next_sibling.next_sibling
+print(p3.prettify())
 
 
-# 처음 발견한 a 태그 선택
-link3 = soup.find("a")
+# 학생들 실습 - title 태그 출력하기
 print()
-print(link3)
-print(link3.string)  # 문자열 출력
-print(link3.text)   # 문자열 출력
+title = soup.html.head.title
+print(title)
 
-# 다중조건
-link4 = soup.find("a", {"class": "sister", "data-io": "link3"})
+
+# 가져온 태그가 가지고 있는 텍스트 출력
 print()
-print(link4)
+print("h1 >>", h1.string)
+print("p1 >>", p1.string)
+print("p2 >>", p2.string)
+print("p3 >>", p3.string)
+print("title >>", title.string)
 
 
-# css 선택자 : select, select_one 이용하기
-# 태그 선택자 : find, find_all
-# select / select_one
-# 태그 + 클래스 + 자식 선택자
-link5 = soup.select_one('p.title > b')
+# 함수확인 - p2에서 사용가능한 함수들
+# print(dir(p2))
+
+
+# 반복 출력 확인 - p2의 다음 요소인 텍스트 엘리먼트 출력
 print()
-print(link5)
-print(link5.string)
-print(link5.text)
-
-# id가 link1인 태그 가져오기
-link6 = soup.select_one("a#link1")
-print()
-print(link6)
-print(link6.string)
-print(link6.text)
-
-# 속성을 이용하여 태그 가져오기
-link7 = soup.select_one("a[data-io='link3']")
-print()
-print(link7)
-print(link7.string)
-print(link7.text)
-
-# 전체 선택
-link8 = soup.select("p.story > a")
-print()
-print(link8)
-# print(link8.string) 여러개를 가지고 오기 때문에 에러남
-# print(link8.text)
-
-
-# a 태그 두번째
-link9 = soup.select('p.story > a:nth-of-type(2)')
-print()
-print('link9', link9)
-
-# p.story 를 가진 게 두 개가 있음
-link10 = soup.select('p.story')
-print()
-print(link10)
-
-
-# 위의 예에서 만일 string 출력을 하고 싶다면?
-for t in link10:
-    temp = t.find_all('a')
-
-    if temp:
-        for v in temp:
-            print('>>>>>', v)
-            print('>>>>>', v.string)
-    else:
-        print('-----', t)
-        print('-----', t.string)
+for v in p2.next_element:
+    print(v, end='')  # end를 안 주면 글자 한자씩 나옴
