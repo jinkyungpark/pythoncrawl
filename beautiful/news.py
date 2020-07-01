@@ -17,8 +17,8 @@ print('작성자 : %s' % soup.find('span', 'txt_info').get_text())
 print('작성시간 : %s' % soup.find('span', 'num_date').get_text())
 
 # 기사의 첫번째 문단 가져오기
-print('첫번째 문단 : %s' % soup.find(
-    'p', attrs={'dmcf-ptype': 'general'}).get_text())
+print('첫번째 문단 : %s' % 
+        soup.find('p', attrs={'dmcf-ptype': 'general'}).get_text())
 
 
 # select는 잘 안됨
