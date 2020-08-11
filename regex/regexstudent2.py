@@ -88,26 +88,17 @@ survived_rate = "%.2f%%" % (
 print("%s %d %d %s" % ('남성', man_survived, man_unsurvived, survived_rate))
 work_sheet_report.append(['남성', man_survived, man_unsurvived, survived_rate])
 # 미혼여성	#	#	#.## %
-single_survived_rate = "%.2f%%" % (
-    single_survived / (single_survived + single_unsurvived) * 100)
-print("%s %d %d %s" % ('미혼여성', single_survived,
-                       single_unsurvived, single_survived_rate))
-work_sheet_report.append(
-    ['미혼여성', single_survived, single_unsurvived, single_survived_rate])
+single_survived_rate = "%.2f%%" % (single_survived / (single_survived + single_unsurvived) * 100)
+print("%s %d %d %s" % ('미혼여성', single_survived,single_unsurvived, single_survived_rate))
+work_sheet_report.append(['미혼여성', single_survived, single_unsurvived, single_survived_rate])
 # 기혼여성	#	#	#.## %
-married_survived_rate = "%.2f%%" % (
-    married_survived / (married_survived + married_unsurvived) * 100)
-print("%s %d %d %s" % ('기혼여성', married_survived,
-                       married_unsurvived, married_survived_rate))
-work_sheet_report.append(
-    ['기혼여성', married_survived, married_unsurvived, married_survived_rate])
+married_survived_rate = "%.2f%%" % (married_survived / (married_survived + married_unsurvived) * 100)
+print("%s %d %d %s" % ('기혼여성', married_survived, married_unsurvived, married_survived_rate))
+work_sheet_report.append(['기혼여성', married_survived, married_unsurvived, married_survived_rate])
 # 기타	#	#	#.## %
-others_survived_rate = "%.2f%%" % (
-    others_survived / (others_survived + others_unsurvived) * 100)
-print("%s %d %d %s" % ('기타', others_survived,
-                       others_unsurvived, others_survived_rate))
-work_sheet_report.append(
-    ['기타', others_survived, others_unsurvived, others_survived_rate])
+others_survived_rate = "%.2f%%" % (others_survived / (others_survived + others_unsurvived) * 100)
+print("%s %d %d %s" % ('기타', others_survived,others_unsurvived, others_survived_rate))
+work_sheet_report.append(['기타', others_survived, others_unsurvived, others_survived_rate])
 
 # - 생존률은 사망자 수 / 생존자 수 + 사망자 수
 # - #.## % 는 소숫점 두자리수까지 표기하라는 의미로 예를 들어 32.12 % 등
