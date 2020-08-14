@@ -9,12 +9,4 @@ driver.get("https://www.daum.net")
 # print(driver.title)
 assert "Daum" in driver.title
 
-elem = driver.find_element_by_name("q")
-
-elem.send_keys("아이폰")
-elem.send_keys(Keys.RETURN)
-assert "No results found." not in driver.page_source
-
-# ---------------------------------------------------------------------------------------
-
-# time.sleep(2)
+print(driver.page_source)
