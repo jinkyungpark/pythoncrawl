@@ -1,4 +1,4 @@
-# 다음 댓글
+# 특정 신문기사의 다음 댓글 가져오기
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 

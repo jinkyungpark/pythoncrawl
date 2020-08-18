@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapyproject2'
+BOT_NAME = 'scrapyproject3'
 
-SPIDER_MODULES = ['scrapyproject2.spiders']
-NEWSPIDER_MODULE = 'scrapyproject2.spiders'
+SPIDER_MODULES = ['scrapyproject3.spiders']
+NEWSPIDER_MODULE = 'scrapyproject3.spiders'
 
 
 # user-agent 설정
@@ -29,6 +29,12 @@ COOKIES_ENABLED = True
 # Referer 삽입
 DEFAULT_REQUEST_HEADERS = {
     'Referer': 'https://news.daum.net/'
+}
+
+# 파이프라인 활성화
+# 숫자가 작을 수록 우선순위 상위
+ITEM_PIPELINES = {
+    'scrapyproject3.pipelines.NewsSpiderPipeline': 300
 }
 
 

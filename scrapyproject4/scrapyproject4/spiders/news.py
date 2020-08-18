@@ -10,7 +10,7 @@ from scrapy.spiders import CrawlSpider, Rule
 
 
 class NewsSpider(CrawlSpider):
-    name = 'newsbot2'
+    name = 'newsbot3'
     allowed_domains = ['news.daum.net']
     start_urls = ['https://news.daum.net/breakingnews/digital']
 
