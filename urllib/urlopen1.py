@@ -1,12 +1,12 @@
 # Get 방식 데이터 통신
-import urllib.request
+import urllib.request as req
 from urllib.parse import urlparse
 
 # 엔카 : 기본요청
 url = "http://www.encar.com"
 
 # 수신된 정보 변수에 담기
-mem = urllib.request.urlopen(url)
+mem = req.urlopen(url)
 
 # 수신된 정보 출력
 print('type : {}'.format(type(mem)))  # <class 'http.client.HTTPResponse'>
