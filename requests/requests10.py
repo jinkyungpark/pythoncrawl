@@ -12,14 +12,14 @@ with requests.Session() as s:
     jar = requests.cookies.RequestsCookieJar()
     # 쿠키 삽입
     jar.set('name','test',domain="httpbin.org",path="/cookies")
-    # 요청 
-    # 데이터 보낼 때 선언한 뒤 보내기
-    payload1 = {'id':'test777', 'pw':'1111'}  # 딕셔너리
-    
-    r = s.put('http://httpbin.org/put',data=payload1,cookies=jar)
+    # 요청    
+    r = s.delete('http://httpbin.org/delete', data={'id':1},cookies=jar)
     
      # 수신 상태 체크
     r.raise_for_status()  # 이 함수를 쓰면 상태 체크를 한 후 이상이 발생하면 다음 문장을 처리 안함
 
     # 출력
     print(r.text)
+
+
+    

@@ -15,8 +15,8 @@ with requests.Session() as s:
     # 요청 
     # 데이터 보낼 때 선언한 뒤 보내기
     payload1 = {'id':'test777', 'pw':'1111'}  # 딕셔너리
-    payload2 = (('id','test778'), ('pw','2222')) # 튜플(튜플로 요청시 튜플의 튜플이어야 함)
-    r = s.post('http://httpbin.org/post',data=payload2,cookies=jar)
+    
+    r = s.put('http://httpbin.org/put',data=payload1,cookies=jar)
     
      # 수신 상태 체크
     r.raise_for_status()  # 이 함수를 쓰면 상태 체크를 한 후 이상이 발생하면 다음 문장을 처리 안함

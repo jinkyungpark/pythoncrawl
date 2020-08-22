@@ -1,43 +1,22 @@
 # requests 사용 스크랩핑
-# 수신 데이터를 json 변환 출력
-
 import requests
-import json
 
-# 세션 활성화 및 json 데이터 요청
-# with requests.Session() as s:
-#     r = s.get('https://httpbin.org/stream/10', stream=True)  # stream 을 주면 좋다
-#     print(r.text)   # 기본 형태로 출력
-
-
-# 세션 활성화 및 json 데이터 요청 / 인코딩 확인 후 set하기
-# with requests.Session() as s:
-#     r = s.get('https://httpbin.org/stream/10', stream=True)   # stream + True 는 Raw Response Content 인경우 사용하라고 되어 있음
-#     print("encoding:{}".format(r.encoding))   # encoding 이 None 임
-#     if r.encoding is None:
-#         r.encoding = 'UTF-8'
-#         print("encoding:{}".format(r.encoding))
-
-
-# 세션 활성화 및 json 데이터 요청 / 인코딩 확인 후 set하기
+# post 방식으로 요청 / timeout 부여
 with requests.Session() as s:
-    r = s.get('https://httpbin.org/stream/10', stream=True)
-    print("Headers {} ".format(r.headers))
 
-    if r.encoding is None:
-        r.encoding = 'UTF-8'
+    # 요청
+    # 데이터 보낼 때 선언한 뒤 보내기
+    # payload1 = {'id': 'test777', 'pw': '1111'}  # 딕셔너리
+    # r = s.post('http://httpbin.org/post', data=payload1)
 
-    # json 변환 출력
-    for line in r.iter_lines(decode_unicode=True):
-        # 라인 출력 후 타입 확인
-        # print(line)
-        # print(type(line))  # <class 'str'>
+    payload2 = (('id', 'test778'), ('pw', '2222'))  # 튜플(튜플로 요청시 튜플의 튜플이어야 함)
+    r = s.post('http://httpbin.org/post', data=payload2)
 
-        # json => 딕셔너리 변환
-        b = json.loads(line)  # str -> 딕셔너리 변환
-        print(type(b))   # <class 'dict'>
+    # 수신 상태 체크
+    r.raise_for_status()  # 이 함수를 쓰면 상태 체크를 한 후 이상이 발생하면 다음 문장을 처리 안함
 
-        for k, v in b.items():
-            print("Key : {}, Value : {}".format(k, v))
-        print()
-        print()
+    # 출력
+    print(r.text)
+
+# payload2 = (('id', 'test778'), ('pw', '2222'))  # 튜플(튜플로 요청시 튜플의 튜플이어야 함)
+# r = s.post('http://httpbin.org/post', data=payload2)

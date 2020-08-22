@@ -1,18 +1,16 @@
 # requests 사용 스크랩핑
-# REST API : GET, POST, PUT : UPDATE, REPLACE(FETCH :UPDATE, MODIFY), DELETE
-# 중요 : url 을 활용해서 자원의 상태 정보를 주고 받는 모든 것을 의미
+# 수신 데이터를 json 변환 출력
+# https://jsonplaceholder.typicode.com/ 사용
 
 import requests
-import json
 
-# post 방식으로 요청 / timeout 부여
-with requests.Session() as s:     
-    # 요청    
-    r = s.delete('https://jsonplaceholder.typicode.com/posts/1')    
-    
-    print(r.headers)
-    # 출력
-    print(r.text)
-
-
-    
+# 세션 활성화 및 json 데이터 요청 / 인코딩 확인 후 set하기
+with requests.Session() as s:
+    r = s.get('https://jsonplaceholder.typicode.com/todos/1', stream=True)
+    print("headers : {}".format(r.headers))  # 헤더 정보 출력
+    print("json : {}".format(r.json()))   # 가져온 json 출력 : 단일 레코드일 때 이렇게 가져옴
+    print("r.json().keys() : {}".format(r.json().keys()))  # 키 정보 출력
+    print("r.json().values() : {}".format(r.json().values()))  # 값 정보 출력
+    print("r.encoding : {}".format(r.encoding))  # 인코딩 확인
+    print("r.content :{}".format(r.content))   # binary 형식으로 보여짐
+    # b'{\n  "userId": 1,\n  "id": 1,\n  "title": "delectus aut autem",\n  "completed": false\n}'

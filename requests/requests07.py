@@ -6,15 +6,17 @@
 import requests
 import json
 
-# 세션 활성화 및 json 데이터 요청 / 인코딩 확인 후 set하기
+# post 방식으로 요청 / timeout 부여
 with requests.Session() as s: 
     # 쿠키 설정(쿠키 정보를 자세히 설정할 수 있음 )
     jar = requests.cookies.RequestsCookieJar()
     # 쿠키 삽입
     jar.set('name','test',domain="httpbin.org",path="/cookies")
-
-    # 요청
-    r = s.get('http://httpbin.org/cookies',cookies=jar)
+    # 요청 
+    # 데이터 보낼 때 선언한 뒤 보내기
+    payload1 = {'id':'test777', 'pw':'1111'}  # 딕셔너리
+    payload2 = (('id','test778'), ('pw','2222')) # 튜플(튜플로 요청시 튜플의 튜플이어야 함)
+    r = s.post('http://httpbin.org/post',data=payload2,cookies=jar)
     
      # 수신 상태 체크
     r.raise_for_status()  # 이 함수를 쓰면 상태 체크를 한 후 이상이 발생하면 다음 문장을 처리 안함

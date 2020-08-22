@@ -5,7 +5,9 @@ import requests
 # 여러번의 requests 요청시 같은 host 를 유지할 수 있고
 # 같은 TCP connection 이용
 s = requests.Session()
+
 # 세션을 이용해 요청
+# get 방식
 r = s.get('https://www.naver.com')
 
 # 수신 데이터
