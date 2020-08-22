@@ -1,24 +1,33 @@
 # Get 방식 데이터 통신
 import urllib.request as req
+from urllib.error import HTTPError
 from urllib.parse import urlparse
 
-# 엔카 : 기본요청
-url = "http://www.encar.com"
+encar_url = "http://www.encar.com/"
 
-# 수신된 정보 변수에 담기
-mem = req.urlopen(url)
+try:
+    response = req.urlopen(encar_url)
 
-# 수신된 정보 출력
-print('type : {}'.format(type(mem)))  # <class 'http.client.HTTPResponse'>
-print('geturl : {}'.format(mem.geturl()))  # http://www.encar.com/index.do
-print('status : {}'.format(mem.status))  # 200
-print('header : {}'.format(mem.getheaders()))
-print('getcode : {}'.format(mem.getcode()))  # 200
-# 읽어올 바이트 수 : 100(너무 크면 에러 남)
-print('read : {}'.format(mem.read(100).decode('utf-8')))
-# 전체 정보
-print('parse : {}'.format(urlparse('http://www.encar.co.kr?test=test')))
-# 전체 정보 중에서 query만
-print('parse : {}'.format(urlparse('http://www.encar.co.kr?test=test').query))
+    # 수신된 정보 확인
+    print(
+        "type : {}".format(type(response))
+    )  # type : <class 'http.client.HTTPResponse'>
+    print(
+        "geturl : {}".format(response.geturl())
+    )  # geturl : http://www.encar.com/index.do
+    print("status : {}".format(response.status))  # status : 200
+    print("header : {}".format(response.getheaders()))
+    print("getcode : {}".format(response.getcode()))  # getcode : 200
+    # url 파싱 전체정보
+    print("parse : {}".format(urlparse("http://www.encar.com?test=test")))
+    # url 정보 중 파라메터에 대한 부분만
+    print("parse : {}".format(urlparse("http://www.encar.com?test=test").query))
+
+    contents = response.read().decode("euc-kr") # parse : test=test
+
+except HTTPError as e:
+    print(e)
+else:
+    print(contents[:4000])
 
 # 페이로드 : 서버에 정보를 담아서 보내고 결과 받기
