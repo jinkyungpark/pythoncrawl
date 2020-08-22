@@ -17,15 +17,16 @@ userAgent = UserAgent()
 
 # 헤더 정보
 headers = {
-    'User-agent' : userAgent.ie,
-    'referer' : 'http://finance.daum.net/'
+    'User-agent': userAgent.ie,
+    'referer': 'http://finance.daum.net/'
 }
 
 # 다음 주식 요청 URL
 url = 'http://finance.daum.net/api/search/ranks?limit=10'
 
 # 요청하기
-res = req.urlopen(req.Request(url,headers=headers)).read().decode("UTF-8")
+# 헤더 값을 같이 보내려면 Request 객체 필요
+res = req.urlopen(req.Request(url, headers=headers)).read().decode("UTF-8")
 
 # 정보 가져오기
 # print(res) - 이쁘게 만들기 전
@@ -39,17 +40,18 @@ data = []
 # 반복문을 돌려 출력하기
 for element in rank_json:
     # 화면 출력
-    print('순위 : {}, 금액 : {}, 회사명 : {}'.format(element['rank'],element['name'],element['tradePrice']))
+    print('순위 : {}, 금액 : {}, 회사명 : {}'.format(
+        element['rank'], element['name'], element['tradePrice']))
     data.append(element)
 
     # 파일(CSV, 엑셀, txt) 저장 및 db 저장
-    with open("c:/download/finance.txt","a") as txt,  open("c:/download/finance.csv", "w", newline="") as csvfile:  # 인코딩을 넣으면 한글 깨짐
+    with open("c:/download/finance.txt", "a") as txt,  open("c:/download/finance.csv", "w", newline="") as csvfile:  # 인코딩을 넣으면 한글 깨짐
         # 파일 저장
-        txt.write('순위 : {}, 금액 : {}, 회사명 : {}\n'.format(element['rank'],element['name'],element['tradePrice'])) 
+        txt.write('순위 : {}, 금액 : {}, 회사명 : {}\n'.format(
+            element['rank'], element['name'], element['tradePrice']))
 
         # csv 저장
-        output = csv.writer(csvfile) 
+        output = csv.writer(csvfile)
         output.writerow(data[0].keys())  # header row
         for row in data:
-            output.writerow(row.values()) # value   
-
+            output.writerow(row.values())  # value
