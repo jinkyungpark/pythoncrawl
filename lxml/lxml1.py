@@ -26,7 +26,7 @@ def main():
         print(url)
         # 파일쓰기
         with open('c:/download/result.txt', 'a') as c:
-            c.write(name+' : '+url+"\n")   # 엔터 포함
+            c.write(url+"\n")   # 엔터 포함
 
 
 def scrape_news_list_page(res):
