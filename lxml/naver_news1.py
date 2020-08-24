@@ -46,7 +46,7 @@ def scrape_news_list_page(res):
     # return urls
 
     # 06/10 확인시 변경됨
-    for a in root.cssselect('.thumb_area .thumb_box div.popup_wrap a:nth-child(3)'):
+    for a in root.cssselect('.thumb_area > .thumb_box > div.popup_wrap > a:nth-child(3)'):
         # 링크
         url = a.get('href')
         urls.append(url)

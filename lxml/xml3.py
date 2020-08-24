@@ -4,7 +4,7 @@ from lxml.html import fromstring, tostring
 
 def parseData():
     # 가져올 rss 주소
-    url = 'https://www.mois.go.kr/gpms/view/jsp/rss/rss.jsp?ctxCd=1013'
+    url = 'https://www.mois.go.kr/gpms/view/jsp/rss/rss.jsp?ctxCd=1001'
 
     try:
 
@@ -22,7 +22,7 @@ def parseData():
         print(root.text_content())  # lxml.html 로 할 때만 사용 가능
 
     except Exception as e:
-        
+
         print(e)
 
 

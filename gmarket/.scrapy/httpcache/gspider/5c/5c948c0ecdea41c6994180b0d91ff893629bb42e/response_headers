@@ -1,0 +1,12 @@
+Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Content-Encoding: gzip
+Vary: Accept-Encoding
+Server: Microsoft-IIS/7.5
+X-Aspnetmvc-Version: 4.0
+X-Aspnet-Version: 4.0.30319
+Set-Cookie: charset=enUS; domain=gmarket.co.kr; path=/
+Set-Cookie: shipnation=KR; domain=gmarket.co.kr; path=/
+X-Powered-By: ASP.NET
+P3P: CP="CAO DSP LAW CUR ADM DEV TAI PSA IVAo CONo HISo OTP OUR DEL LEG SAMo UNI COM PUR NAV INT STA"
+Date: Mon, 24 Aug 2020 08:49:08 GMT

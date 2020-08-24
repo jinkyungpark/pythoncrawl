@@ -6,7 +6,6 @@ from lxml.html import fromstring, tostring
 from urllib.error import HTTPError, URLError
 
 try:
-    # url = "https://en.wikipedia.org/wiki/Seoul_Metropolitan_Subway"
     url = "https://ko.wikipedia.org/wiki/%EC%84%9C%EC%9A%B8_%EC%A7%80%ED%95%98%EC%B2%A0"
     with requests.Session() as s:
         res = s.get(url)
