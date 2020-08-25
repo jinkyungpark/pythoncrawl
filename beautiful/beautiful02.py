@@ -2,28 +2,9 @@
 # 스크랩핑 도구로 유명함
 from bs4 import BeautifulSoup  # beautifulsoup4
 
-# html 변수에 들어있는 값이 예를 들어 웹에서 가져온 소스라고 할 때
+with open("./beautiful/story.html", "r") as f1:
+    html = f1.read()
 
-html = """
-    <html>
-        <head>
-            <title>The Dormouse's story</title>
-        </head>
-        <body>
-            <h1>this is h1 area</h1>
-            <h2>this is h2 area</h2>
-            <p class='title'><b>The Dormouse's story</b></p>
-            <p class='story'>Once upon a time there were three little sistes.
-                <a href='http://example.com/elsie' class='sister' id='link1'>Elsie</a>
-                <a href='http://example.com/lacie' class='sister' id='link2'>Lacie</a>
-                <a data-io="link3" href='http://example.com/little' class='sister' id='link3'>Title</a>
-            </p>
-            <p class='story'>
-                story.....
-            </p>
-        </body>
-    </html>
-"""
 
 # Beautifulsoup 단계
 # bs4 초기화 - 웹에서 가져온 문서를 첫번째 인자로, 문서의 구조를 두번째 인자로
@@ -31,18 +12,29 @@ soup = BeautifulSoup(html, 'html.parser')
 
 # 타입확인
 print('soup', type(soup))  # soup <class 'bs4.BeautifulSoup'>
-print('soup', soup.prettify())
+# print(soup.prettify())
 
+
+# 타이틀 태그 전체 출력
+print("title >> {}".format(soup.title))
+# 타이틀 태그 내용 출력
+print("title text >> {}".format(soup.title.string))
+# 타이틀 태그의 부모 태그 출력
+print("title parent >> {}".format(soup.title.parent))  # <head> ~ </head>
 
 # h1 태그 접근
 print()
-h1 = soup.html.body.h1
-print(h1)
+# h1 = soup.html.body.h1
+h1 = soup.body.h1
+print("h1 >>", h1)
 
 # 첫번째 p 태그 접근
 print()
-p1 = soup.html.body.p
-print(p1)
+# p1 = soup.html.body.p
+p1 = soup.p
+print("p1 >>> ", p1)
+# 첫번째 p가 가지고 있는 클래스명 구하기
+print("p1 class >>> ", p1['class'])
 
 # 두번째 p 태그 접근
 # next_sibling : p 태그 다음의 공백 의미
@@ -57,19 +49,12 @@ p3 = p2.next_sibling.next_sibling
 print(p3.prettify())
 
 
-# 학생들 실습 - title 태그 출력하기
-print()
-title = soup.html.head.title
-print(title)
-
-
 # 가져온 태그가 가지고 있는 텍스트 출력
 print()
 print("h1 >>", h1.string)
 print("p1 >>", p1.string)
 print("p2 >>", p2.string)
 print("p3 >>", p3.string)
-print("title >>", title.string)
 
 
 # 함수확인 - p2에서 사용가능한 함수들

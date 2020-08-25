@@ -4,27 +4,8 @@
 from bs4 import BeautifulSoup  # beautifulsoup4
 
 # html 변수에 들어있는 값이 예를 들어 웹에서 가져온 소스라고 할 때
-
-html = """
-    <html>
-        <head>
-            <title>The Dormouse's story</title>
-        </head>
-        <body>
-            <h1>this is h1 area</h1>
-            <h2>this is h2 area</h2>
-            <p class='title'><b>The Dormouse's story</b></p>
-            <p class='story'>Once upon a time there were three little sistes.
-                <a href='http://example.com/elsie' class='sister' id='link1'>Elsie</a>
-                <a href='http://example.com/lacie' class='sister' id='link2'>Lacie</a>
-                <a data-io="link3" href='http://example.com/little' class='sister' id='link3'>Title</a>
-            </p>
-            <p class='story'>
-                story.....
-            </p>
-        </body>
-    </html>
-"""
+with open("./beautiful/story.html", "r") as f1:
+    html = f1.read()
 
 # Beautifulsoup 단계
 # bs4 초기화 - 웹에서 가져온 문서를 첫번째 인자로, 문서의 구조를 두번째 인자로
@@ -44,18 +25,18 @@ print(a)
 # 태그가 가지고 있는 속성 값으로 가져오기
 
 # 클래스 이름으로 가져오기
-print()
+print("----")
 link2 = soup.find_all("a", class_='sister')
 print(link2)
 
 # 텍스트 노드 값이 Elsie인 것 찾아오기
-print()
+print("****")
 link2 = soup.find_all("a", string=["Elsie"])
 print(link2)
 
 # 텍스트 노드가 Elsie인 노드와 Title인 것 가져오기
 print()
-link2 = soup.find_all("a", string=["Elsie", "Title"])
+link2 = soup.find_all("a", string=["Elsie", "Tillie"])
 print(link2)
 
 
