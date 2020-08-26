@@ -107,3 +107,8 @@ for t in link10:
     else:
         print('-----', t)
         print('-----', t.string)
+
+
+# 현재 html 문서의 모든 텍스트만 가져오려면?
+print("텍스트 모두 출력")
+print(soup.get_text())
