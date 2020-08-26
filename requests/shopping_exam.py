@@ -10,15 +10,13 @@ try:
 
     with requests.Session() as s:
         for url in url_list:
+            
             res = s.get(url)
 
-            top100 = json.loads(res.text)
-
-            # print('확인 : ', top100)
-            print(url)
-            for i, item in enumerate(top100, 1):
-                if i < 101:  # 163개까지 가져와서 이렇게 처리함
-                    print(i, item['product_name'])
-            print()
+            for i, item in enumerate(res.json(), 1):
+                if i < 101:
+                    print(i, item["product_name"])
+            print("*" * 30)
+            
 except Exception as e:
     print(e)
