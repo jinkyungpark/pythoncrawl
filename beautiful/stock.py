@@ -11,8 +11,11 @@ res = requests.get('https://finance.naver.com/')
 soup = BeautifulSoup(res.content, 'html.parser')
 # print(soup)
 
-# 필요 데이터 추출하기
-stock5 = soup.select('div.aside_area.aside_popular > table > tbody > tr > th > a')
+# 필요 데이터 추출하기 => table.tbl_home 으로 시작하면 너무 많음
+
+stock5 = soup.select(
+    'div.aside_area.aside_popular > table > tbody > tr > th > a')
+
 # 필요 데이터 활용하기
 for item in stock5:
     print(item.get_text())
