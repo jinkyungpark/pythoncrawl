@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # 페이지 요청 - 위키피디아 서울지히철 사진 저장
+# 두 번째 있는 사진 저장
 with requests.Session() as s:
     res = s.get(
         "https://ko.wikipedia.org/wiki/%EC%84%9C%EC%9A%B8_%EC%A7%80%ED%95%98%EC%B2%A0")

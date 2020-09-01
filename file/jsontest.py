@@ -24,6 +24,7 @@ data = """
 # 딕셔너리 형태로 만들어 주는 것
 json_data = json.loads(data)
 
+
 # 전체 데이터 출력하기
 print(json_data)
 # id 키 값의 value 가져오기
@@ -32,5 +33,3 @@ print(json_data['id'])
 print(json_data['history'])
 print(json_data['history'][0])
 print(json_data['history'][0]['date'])
-
-

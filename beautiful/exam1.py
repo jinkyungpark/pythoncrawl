@@ -20,7 +20,6 @@ for no in range(5):
     # 하나의 행 가져오기
     data = soup.select('div.list_content > div.list_item.symph_row')
 
-
     for item in data:
         # 가져온 하나의 행에서 타이틀과 시간 가져오기
         title = item.select_one(

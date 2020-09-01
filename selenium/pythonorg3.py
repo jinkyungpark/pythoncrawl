@@ -49,6 +49,5 @@ titles = driver.find_elements_by_tag_name("h3")
 for title in titles:
     print(title.text)
 
-
 # 크롬 브라우저 닫기
 driver.quit()

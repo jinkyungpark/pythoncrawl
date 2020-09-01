@@ -16,14 +16,14 @@ res = requests.get(naver_open_api, headers=header_params)
 
 if res.status_code == 200:
     # json 형태로 출력
-    # data = res.json()   # json.loads()와 비슷한 역할
+    data = res.json()   # json.loads()와 비슷한 역할
     # print(data)
     # print()
-    # print(data['items'][0])  # 첫번째 상품만 출력
-    # print(data['items'][0]['title'])  # 파인디지털 파인드라이브 Q30
+    print(data['items'][0])  # 첫번째 상품만 출력
+    print(data['items'][0]['title'])  # 파인디지털 파인드라이브 Q30
 
-    # print()
-    # pprint.pprint(data['items'])  # json 이쁘게 출력하기
+    print()
+    pprint.pprint(data['items'])  # json 이쁘게 출력하기
 
     # 현재 출력된 상품들의 타이틀과 링크만 출력하기
     for index, item in enumerate(data['items'], 1):

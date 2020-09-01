@@ -2,17 +2,30 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+# exe 생략가능
 driver = webdriver.Chrome("d:/chromedriver/chromedriver.exe")
-
+driver.implicitly_wait(3)
 
 driver.get("https://www.daum.net")
-print(driver.current_url)  # 현재 접속한 페이지 확인
+
+# ---------------------------------------------------------- 1차 확인
+
+print(driver.current_url)
+print(driver.title)
 assert "Daum" in driver.title
 
-elem = driver.find_element_by_name("q")
+# ---------------------------------------------------------- 2차 확인
+
+# print(driver.page_source)
 
 
-elem.send_keys("아이폰")
-elem.send_keys(Keys.RETURN)
-assert "No results found." not in driver.page_source
+# ---------------------------------------------------------- 3차 확인
 
+print()
+print('Session ID : {}'.format(driver.session_id))
+print('Title : {}'.format(driver.title))
+print('URL : {}'.format(driver.current_url))
+print('Cookies : {}'.format(driver.get_cookies))
+
+# ------------------------------------------------------------
+driver.quit()

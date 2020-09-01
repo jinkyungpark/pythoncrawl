@@ -46,6 +46,7 @@ for i, item in enumerate(items,1):
     # 엑셀파일로 저장하기
     sheet.append([i,name.get_text(),title.get_text(),title['href'],price.get_text()])
     
+
     # 주소가 들어 있는 부분 하이퍼링크 걸어주기
     sheet.cell(row=i+1,column=4).hyperlink = title['href']
 
@@ -84,7 +85,6 @@ cell_E1 = sheet['E1']
 cell_E1.alignment = openpyxl.styles.Alignment(horizontal='center')
 # 글자 색상 변경
 cell_E1.font = openpyxl.styles.Font(color="01579B")
-
 
 gmarket_best100.save('c:\\gmarket_best100.xlsx')
 gmarket_best100.close()

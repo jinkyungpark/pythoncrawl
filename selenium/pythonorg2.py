@@ -34,8 +34,6 @@ elem.send_keys("python")
 # 엔터 입력
 elem.send_keys(Keys.RETURN)
 
-# 소스 안에 이 내용이 들어 있지 않아야 해
-assert "No results found." not in driver.page_source
 # ---------------------------------------------------------------------------------------
 # 검색어 넣고 엔터 친 후 결과가 보여지는 경우 테스트 - 2. find_elements_by_tag_name
 
@@ -43,11 +41,14 @@ assert "No results found." not in driver.page_source
 # 검색어를 넣고 2초 기다릴게
 time.sleep(2)
 
+# 소스 안에 이 내용이 들어 있지 않아야 해
+# assert "No results found." not in driver.page_source
+
 # 검색결과를 받아와서 출력하기
 titles = driver.find_elements_by_tag_name("h3")
+
 for title in titles:
     print(title.text)
-
 
 # 크롬 브라우저 닫기
 driver.quit()

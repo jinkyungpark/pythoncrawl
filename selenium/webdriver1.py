@@ -3,4 +3,4 @@
 from selenium import webdriver
 
 # webdriver 설정
-browser = webdriver.Chrome('./webdriver/chrome/chromedriver.exe')
+browser = webdriver.Chrome('d:/chromedriver/chromedriver.exe')
