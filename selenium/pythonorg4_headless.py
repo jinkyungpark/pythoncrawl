@@ -5,7 +5,7 @@ import time
 # 드라이버 생성
 chromedriver = "d:/chromedriver/chromedriver.exe"
 headless_options = webdriver.ChromeOptions()
-headless_options.add_argument("--headless")
+headless_options.add_argument("headless")
 driver = webdriver.Chrome(chromedriver, options=headless_options)
 
 # 접속할 사이트 주소 넣어주기

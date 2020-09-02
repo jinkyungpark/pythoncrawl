@@ -18,9 +18,9 @@ headless_options.add_argument("lang=ko_KR")
 driver = webdriver.Chrome(chromedriver, options=headless_options)
 # 전체 화면을 띄워야 함
 driver.maximize_window()
+driver.implicitly_wait(2)
 
 driver.get("https://twitter.com/")
-driver.implicitly_wait(2)
 
 # 로그인 입력 창
 userid = driver.find_element_by_name("session[username_or_email]")
@@ -34,7 +34,7 @@ userpwd.send_keys(Keys.RETURN)
 
 time.sleep(2)
 
-#---------------------------------------- 트위터 로그인 종료
+# ---------------------------------------- 트위터 로그인 종료
 # 이 작업을 여러번 하다 보니 막혀버렸음
 
 

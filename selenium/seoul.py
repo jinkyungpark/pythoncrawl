@@ -19,14 +19,18 @@ driver.find_element_by_id("search_btn").click()
 element = driver.find_element_by_id("query")
 
 element.send_keys("영어")
+
+time.sleep(2)
+
 element.send_keys(Keys.RETURN)
 
 # 검색결과가 새창으로 뜨는 시간 기다리기
 time.sleep(3)
-print("main : {}".format(driver.current_url))
 
-# 최근 열린 탭으로 전환
-driver.switch_to.window(driver.window_handles[-1])
+
+# 최근 열린 탭으로 전환 driver.window_handles[0]  => 현재 창
+driver.switch_to.window(driver.window_handles[1])
+
 
 # 로딩 기다리기
 print("new window : {}".format(driver.current_url))

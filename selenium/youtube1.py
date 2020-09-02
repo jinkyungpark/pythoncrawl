@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 driver = webdriver.Chrome("d:/chromedriver/chromedriver.exe")
-
+# driver.implicitly_wait(5) # 꼭 필요한 것은 아님
 
 driver.get("https://www.youtube.com/")
 assert "YouTube" in driver.title
@@ -21,4 +21,3 @@ time.sleep(2)
 titles = driver.find_elements_by_tag_name("h3")
 for title in titles:
     print(title.text)
-

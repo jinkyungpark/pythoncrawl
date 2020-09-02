@@ -1,5 +1,3 @@
-#
-
 from selenium import webdriver
 import time
 from selenium.webdriver.common.by import By   # wait 시 필요
@@ -16,7 +14,7 @@ chrome_options.add_argument("--headless")
 
 # 웹 드라이버 로드 -- Headless 모드(개발 다 하고 변경)
 browser = webdriver.Chrome(
-    "./webdriver/chrome/chromedriver.exe", options=chrome_options)
+    "d:/chromedriver/chromedriver.exe", options=chrome_options)
 
 # -------------------------- 확인(브라우저가 안 뜨는지 확인)
 
@@ -72,13 +70,14 @@ WebDriverWait(browser, 3).until(EC.presence_of_element_located(
 # ----------------------- 확인
 
 time.sleep(2)    # 약간 대기 시간 주기(빨리 진행 시 에러발생 가능)
+
 soup = BeautifulSoup(browser.page_source, 'html.parser')
 # print(soup.prettify())
 
 # ------------------------ 확인
 
 pro_list = soup.select("div.main_prodlist.main_prodlist_list > ul > li")
-# print(pro_list)
+# print(pro_list)  => selenium WebElement 로 나옴
 
 # -----------------------  메인 상품 페이지 출력
 

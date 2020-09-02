@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 
 # 엑셀 처리 임포트
-import xlsxwriter
+import openpyxl
 # 이미지 바이트 처리
 from io import BytesIO
 # 저장
@@ -19,10 +19,13 @@ import urllib.request as req
 
 
 # 엑셀 처리 선언
-workbook = xlsxwriter.Workbook("c:/crawling_result.xlsx")
-# 워크 시트 작성
-worksheet = workbook.add_worksheet()
-
+workbook = openpyxl.Workbook()
+# 기본 워크 시트 활성화
+worksheet = workbook.active
+worksheet.column_dimensions['A'].width = 52
+worksheet.column_dimensions['B'].width = 18
+worksheet.column_dimensions['C'].width = 10
+worksheet.append(['제품명', '가격', '이미지'])
 
 # 크롬 브라우저 옵션 설정
 chrome_options = Options()
@@ -31,7 +34,7 @@ chrome_options.add_argument("--headless")
 
 # 웹 드라이버 로드 -- Headless 모드(개발 다 하고 변경)
 browser = webdriver.Chrome(
-    "./webdriver/chrome/chromedriver.exe", options=chrome_options)
+    "d:/chromedriver/chromedriver.exe", options=chrome_options)
 
 # -------------------------- 확인(브라우저가 안 뜨는지 확인 : 일반모드)
 
@@ -122,22 +125,19 @@ while cur_page <= taget_crawl_num:
             prod_price = v.select('p.price_sect > a')[0].text.strip()
 
             # 엑셀 파일 저장
-            # A1 셀부터 입력될 것이기 때문에
-            worksheet.write('A%s' % ins_cnt, prod_name)
-            worksheet.write('B%s' % ins_cnt, prod_price)
+            worksheet.append([prod_name, prod_price])
+            # 이미지 저장
+            img = openpyxl.drawing.image.Image(prod_img)
+            img.width = 30
+            img.height = 20
+            worksheet.add_image(img, "C"+str(ins_cnt+1))
 
-            # 엑셀 저장 이미지(형식은 지정되어 있는 것=> 딕셔너리)
-            # x_scale, y_scale 를 줘서 축소시킬 수도 있음
-            # worksheet.insert_image('C%s' % ins_cnt, prod_name, {
-            #                        'image_data': prod_img, 'x_scale': 0.3, 'y_scale': 0.3})
-            worksheet.insert_image('C%s' % ins_cnt, prod_name, {
-                                   'image_data': prod_img})
             ins_cnt += 1
 
         print()
-
     # 페이지 별 스크린 샷 저장
     # browser.save_screenshot('c:/target_page{}.png'.format(cur_page))
+    workbook.save("./resource/danawa44.xlsx")
 
     # 현재 페이지 번호 변경
     cur_page += 1
