@@ -14,8 +14,9 @@ from bs4 import BeautifulSoup
 import openpyxl
 # 이미지 바이트 처리
 from io import BytesIO
-# 저장
-import urllib.request as req
+# 이미지를 요청하기 위해
+import requests
+from fake_useragent import UserAgent
 
 
 # 엑셀 처리 선언
@@ -66,9 +67,9 @@ browser.get("http://prod.danawa.com/list/?cate=112758&15main_11_02")
 WebDriverWait(browser, 3).until(EC.presence_of_element_located(
     (By.XPATH, '//*[@id="dlMaker_simple"]/dd/div[2]/button[1]'))).click()
 
-
+# 13번이라 Asus 가 나옴
 WebDriverWait(browser, 3).until(EC.presence_of_element_located(
-    (By.XPATH, '//*[@id="selectMaker_simple_priceCompare_A"]/li[13]/label'))).click()
+    (By.XPATH, '//*[@id="selectMaker_simple_priceCompare_A"]/li[4]/label'))).click()
 
 time.sleep(2)    # 약간 대기 시간 주기(빨리 진행 시 에러발생 가능)
 
@@ -118,8 +119,8 @@ while cur_page <= taget_crawl_num:
             # 403에러 때문에 수정
             # prod_img = BytesIO(req.urlopen(url).read())
 
-            request = req.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            prod_img = BytesIO(req.urlopen(request).read())  # 이미지 요청 후 Byte 변환
+            res = requests.get(url, headers={'User-Agent': UserAgent().chrome})
+            prod_img = BytesIO(res.content)
 
             # 가격
             prod_price = v.select('p.price_sect > a')[0].text.strip()
@@ -137,7 +138,7 @@ while cur_page <= taget_crawl_num:
         print()
     # 페이지 별 스크린 샷 저장
     # browser.save_screenshot('c:/target_page{}.png'.format(cur_page))
-    workbook.save("./resource/danawa44.xlsx")
+    workbook.save("./resources/danawa44.xlsx")
 
     # 현재 페이지 번호 변경
     cur_page += 1

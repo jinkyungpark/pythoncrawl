@@ -6,7 +6,7 @@
 from selenium import webdriver
 
 # webdriver 설정
-browser = webdriver.Chrome('./webdriver/chrome/chromedriver.exe')
+browser = webdriver.Chrome('d:/chromedriver/chromedriver.exe')
 
 # ------------------------ (웹드라이버 구동 여부)
 
@@ -15,9 +15,9 @@ browser = webdriver.Chrome('./webdriver/chrome/chromedriver.exe')
 browser.implicitly_wait(5)  # 5초(일반적인 코드임)
 # print(dir(browser))  # 사용할 수 있는 함수 알아보기
 
-# 브라우저 크기 
+# 브라우저 크기
 # 브라우저 크기를 지정하지 않은 경우 조금 전 띄웠던 브라우저 크기로 띄워짐
-browser.maximize_window() # 모니터 크기에 꽉차는 브라우저 크기 생성  
+browser.maximize_window()  # 모니터 크기에 꽉차는 브라우저 크기 생성
 
 # browser.set_window_size(500,400) # 특정 크기로 브라우저 띄우고 싶다면
 
@@ -36,6 +36,3 @@ print('Session ID : {}'.format(browser.session_id))
 print('Title : {}'.format(browser.title))
 print('URL : {}'.format(browser.current_url))
 print('Cookies : {}'.format(browser.get_cookies))
-
-
-
