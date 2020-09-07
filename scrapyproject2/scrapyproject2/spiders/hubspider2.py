@@ -17,18 +17,33 @@ class Hubspider2Spider(scrapy.Spider):
         # 전체 가져오기 : getall() / extract()
 
         # CSS Selector 를 이용한 타이틀 가져오기
-        titles = response.css("div.post-header > h2 > a::text").getall()
+        # titles = response.css("div.post-header > h2 > a::text").getall()
         # CSS Selector 를 이용한 날짜 가져오기
-        dates = response.css(
-            "div.post-header div.byline span.date a::text").getall()
-        for idx, title in enumerate(titles, 0):
-            # 화면 출력
-            # print("title : {}".format(title))
-            # print("date : {}".format(dates[idx]))
+        # dates = response.css(
+        #     "div.post-header div.byline span.date a::text").getall()
+        # for idx, title in enumerate(titles, 0):
+        # 화면 출력
+        # print("title : {}".format(title))
+        # print("date : {}".format(dates[idx]))
 
-            # 리턴 형태
-            # return type : Request, Item, Dictionary, None
-            yield {
+        # 리턴 형태
+        # return type : Request, Item, Dictionary, None
+        # yield {
+        #     "title": title,
+        #     "date": dates[idx]
+        # }
+
+        # xpath 이용하기
+        titles = response.xpath(
+            "//div[@class='post-header']/h2/a/text()").getall()
+        dates = response.xpath(
+            "//div[@class='post-header']/div[@class='byline']/span[@class='date']/a/text()").getall()
+        for idx, title in enumerate(titles, 0):
+            # 화면 확인용
+            print("title : {}".format(title))
+            print("date : {}".format(dates[idx]))
+            # 파일 출력용
+            yield{
                 "title": title,
                 "date": dates[idx]
             }
