@@ -1,7 +1,6 @@
-import pathlib
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for scrapyproject6 project
+# Scrapy settings for naveropenapi project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -10,44 +9,19 @@ import pathlib
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapyproject6'
+BOT_NAME = 'naveropenapi'
 
-SPIDER_MODULES = ['scrapyproject6.spiders']
-NEWSPIDER_MODULE = 'scrapyproject6.spiders'
+SPIDER_MODULES = ['naveropenapi.spiders']
+NEWSPIDER_MODULE = 'naveropenapi.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapyproject6 (+http://www.yourdomain.com)'
+#USER_AGENT = 'naveropenapi (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
-# 파일 자동 저장
-# 로컬 파일 시스템의 절대 경로는 인식못함(유닉스 시스템만 가능)
-FEEDS = {
-    'items.json': {
-        'format': 'json'
-    },
-    pathlib.Path("../../tmp/%(time)s.json"): {
-        'format': 'json'
-    },
-    'items.xml': {
-        'format': 'xml'
-    },
-    pathlib.Path("../../tmp/%(name)s/%(time)s.xml"): {
-        'format': 'xml'
-    },
-    pathlib.Path('../../tmp/items.csv'): {
-        'format': 'csv'
-    }
-}
-
-# 인코딩
 FEED_EXPORT_ENCODING = "utf-8"
-
-# 들여쓰기
-FEED_EXPORT_INDENT = 4
-
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -75,13 +49,13 @@ FEED_EXPORT_INDENT = 4
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'scrapyproject6.middlewares.Scrapyproject6SpiderMiddleware': 543,
+#    'naveropenapi.middlewares.NaveropenapiSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'scrapyproject6.middlewares.Scrapyproject6DownloaderMiddleware': 543,
+#    'naveropenapi.middlewares.NaveropenapiDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -92,9 +66,9 @@ FEED_EXPORT_INDENT = 4
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'scrapyproject6.pipelines.Scrapyproject6Pipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'naveropenapi.pipelines.NaveropenapiPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
