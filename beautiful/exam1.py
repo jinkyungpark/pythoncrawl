@@ -24,13 +24,13 @@ for no in range(5):
         # 가져온 하나의 행에서 타이틀과 시간 가져오기
         title = item.select_one(
             'div.list_title > a.list_subject > span.subject_fixed')
-        time = item.select_one('div.list_time > span')
+        time = item.select_one('div.list_time > span > span')
 
         # print(title.get_text())
-        # print(time.get_text().strip()[:5])  # 날짜에 숨겨진 시분초까지 나와서
+        # print(time.get_text().strip()[:10])  # 날짜에 숨겨진 시분초까지 나와서
 
         # 한 행 구성하기
-        board_content = [title.get_text().strip(), time.get_text().strip()[:5]]
+        board_content = [title.get_text().strip(), time.get_text().strip()[:10]]
         # 각각의 행을 붙여 시트에 붙일 상태로 만들기
         board_lists.append(board_content)
 
