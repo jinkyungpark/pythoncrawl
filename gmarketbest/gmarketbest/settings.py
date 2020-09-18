@@ -29,9 +29,13 @@ FEED_EXPORT_ENCODING = "utf-8"
 # DUPEFILTER_CLASS = 'scrapy.dupefilters.BaseDupeFilter'
 
 # items에 저장될때 필드 순서를 지키고 싶다면?
-FEED_EXPORT_FIELDS = ['main_cate_name', 'sub_cate_name',
+FEED_EXPORT_FIELDS = ['main_cate_name', 'sub_cate_name', 'item_code',
                       'ranking', 'title', 'ori_price', 'dis_price', 'discount_percent']
 
 
 # 스크래피가 동시에 크롤링 하는 갯수를 줄이면 순서대로 저장도 가능
 # CONCURRENT_REQUESTS = 1
+
+ITEM_PIPELINES = {
+    'gmarketbest.pipelines.GmarketbestPipeline': 300,
+}

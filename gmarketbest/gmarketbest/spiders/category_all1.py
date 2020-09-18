@@ -1,8 +1,9 @@
-# 내가 작성한 것
+# 내가 작성한 것 => 아이템 코드까지 포함된 상태
 import scrapy
 from gmarketbest.items import GmarketbestItem
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
+import re
 
 
 class GspiderSpider(CrawlSpider):
@@ -64,6 +65,12 @@ class GspiderSpider(CrawlSpider):
 
             ranking = idx
             title = item.css("a::text").get()
+
+            # 아이템 코드 추출
+            href = item.css("a::attr('href')").get()
+            pattern = re.compile("code=[0-9]+")
+            item_code = pattern.findall(href)[0].split("=")[1]
+
             ori_price = item.css(
                 "div.item_price div.o-price span span::text").get()
             dis_price = item.css(
@@ -74,7 +81,7 @@ class GspiderSpider(CrawlSpider):
             # 후 처리
             # 가격이 둘 다 없는 경우가 있음 - 무료인 경우
             if dis_price == None:
-                dis_price = '0'
+                dis_price = "0"
 
             if ori_price == None:
                 ori_price = dis_price
@@ -88,11 +95,13 @@ class GspiderSpider(CrawlSpider):
             else:  # 모든 discount 부분에 붙은 %를 떼어내 버리기
                 discount_percent = discount_percent.replace("%", "")
 
-            # print(response.meta["main_cate_name"], response.meta["sub_cate_name"], ranking, title,
+            # print(response.meta["main_cate_name"], response.meta["sub_cate_name"], ranking, item_code, title,
             #       ori_price, dis_price, discount_percent)
+
             best_item = GmarketbestItem()
             best_item['main_cate_name'] = response.meta["main_cate_name"]
             best_item['sub_cate_name'] = response.meta["sub_cate_name"]
+            best_item['item_code'] = item_code
             best_item['ranking'] = ranking
             best_item['title'] = title
             best_item['ori_price'] = ori_price

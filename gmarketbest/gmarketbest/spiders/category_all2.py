@@ -1,3 +1,4 @@
+# 동강1 - Item 사용하기 전
 import scrapy
 from gmarketbest.items import GmarketbestItem
 

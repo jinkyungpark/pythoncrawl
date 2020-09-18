@@ -1,3 +1,4 @@
+# 동강2 - items 사용 후
 import scrapy
 from gmarketbest.items import GmarketbestItem
 
@@ -112,6 +113,3 @@ class GspiderSpider(scrapy.Spider):
                 meta={
                     "maincategory_name": maincategory_name, "subcategory_name": subcategory_names[index]},
             )
-
-    def best100_extract(self):
-        pass
