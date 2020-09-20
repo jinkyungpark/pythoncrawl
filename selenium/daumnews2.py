@@ -1,6 +1,6 @@
 from selenium import webdriver
 import time
-
+from bs4 import BeautifulSoup
 
 # webdrvier 로드
 chromedriver = "d:/chromedriver/chromedriver.exe"
@@ -16,8 +16,15 @@ article = driver.find_element_by_css_selector(
     "ul.list_thumb > li > a > div.cont_item")
 article.click()
 
-ele = driver.find_element_by_css_selector("div.head_view > h3")
-print(ele.text)
+# ele = driver.find_element_by_css_selector("div.head_view > h3")
+# print(ele.text)
+
+# beautifulsoup 으로 처리하기
+soup = BeautifulSoup(driver.page_source, "html.parser")
+
+title = soup.select_one("div.head_view > h3")
+print(title.text)
+
 
 time.sleep(3)
 
