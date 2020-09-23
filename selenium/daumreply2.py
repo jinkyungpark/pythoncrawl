@@ -23,7 +23,7 @@ headless_options.add_argument(
     "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"
 )
 # 브라우저 크기 지정
-headless_options.add_argument("window-size=1920x1080")
+headless_options.add_argument("window-size=1920,1080")
 # 사용자가 쓰는 언어
 headless_options.add_argument("lang=ko_KR")
 driver = webdriver.Chrome(chromedriver, chrome_options=headless_options)
@@ -33,17 +33,14 @@ driver = webdriver.Chrome(chromedriver, chrome_options=headless_options)
 driver.get("https://news.v.daum.net/v/20200814162840083")
 
 
-# 최신순 클릭
+# 최신순 클릭하기
 
-# 최신순 버튼이 보여질때까지 기다리고
+# 최신순 버튼이 보여질때까지 기다린 후 클릭하기
 WebDriverWait(driver, 3).until(
     EC.presence_of_element_located(
-        (By.CSS_SELECTOR, "#alex-area > div > div > div > div.cmt_box > ul.list_category > li:nth-child(3)")))
-# 최신순 버튼 찾기
-recent_count = driver.find_element_by_css_selector(
-    "#alex-area > div > div > div > div.cmt_box > ul.list_category > li:nth-child(3)")
-# 최신순 버튼 클릭
-webdriver.ActionChains(driver).click(recent_count).perform()
+        (By.CSS_SELECTOR, "div.cmt_box > ul > li:nth-child(3)")
+    )
+).click()
 
 
 # 특정 기사에 딸린 댓글 가져오기
