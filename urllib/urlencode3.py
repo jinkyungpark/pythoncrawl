@@ -3,7 +3,9 @@ from urllib.parse import urlencode
 from urllib.error import URLError
 
 # 네이버 검색 창에서 영화라는 검색어를 넣고 검색하는 경우
+# 영화라는 글자를 인코딩해서 보내면 잘 됨
 # search_url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EC%98%81%ED%99%94"
+
 
 search_url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&"
 

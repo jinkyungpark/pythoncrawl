@@ -7,7 +7,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 
 # 서울시 평생학습 포털 사이트에서 영어 와 관련된
-# 과정 추출하기
+# 과정 추출하기 - 팝업창 닫기와 WebdriverWait 사용
 
 # 웹드라이버 로드
 driver = webdriver.Chrome("d:/webdriver/chromedriver.exe")

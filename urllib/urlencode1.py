@@ -2,7 +2,6 @@
 # 페이로드 : 서버에 정보를 담아서 보내고 결과 받기
 
 from urllib.request import urlopen
-from urllib.parse import urlencode
 
 # ipify : api로 요청을 보내면 응답 해주는 서버
 # 파라메터를 딸려 보낼때 아래처럼 작업하면 되긴 되지만

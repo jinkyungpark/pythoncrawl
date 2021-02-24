@@ -18,6 +18,7 @@ for num in [1001, 1012, 1013, 1014]:
     params.append(dict(ctxCd=num))
 
 # 중간 확인
+# [{'ctxCd': 1001}, {'ctxCd': 1012}, {'ctxCd': 1013}, {'ctxCd': 1014}]
 print(params)
 
 # 연속해서 4번 요청
