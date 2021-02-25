@@ -1,39 +1,36 @@
 # BeautifulSoup 사용 스크랩핑 - 이미지 다운로드
+# requests/fake_useragent/Beautifulsoup
 
 import os
-import urllib.parse as rep
-import urllib.request as req
+import requests
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
+import urllib.request as req
 
 # Header 정보 초기화
-opener = req.build_opener()
+userAgent = UserAgent()
 # User-Agent 정보
-opener.addheaders = [('User-Agent', UserAgent().ie)]
-# Header 정보 삽입
-req.install_opener(opener)
+headers = {'user-agent': userAgent.chrome}
+
 
 # 네이버 이미지 기본 URL(크롬 개발자)
-base = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query='
+base = 'https://search.naver.com/search.naver?where=image&sm=tab_jum'
 # 검색어
-quote = rep.quote_plus('호랑이')
-# URL 완성
-url = base + quote
+param = {"query": "트럭"}
 
-# 요청 URL 확인
-print('Request URL : {}'.format(url))
 
 # Request
-res = req.urlopen(url)
+res = requests.get(base, params=param, headers=headers)
+
 
 # 이미지 저장 경로
 savePath = "c:\\imagedown\\"
 
 # 폴더 생성 예외 처리(문제 발생 시 )
-try:    
+try:
     # 기본 폴더가 있는지 체크
     if not (os.path.isdir(savePath)):
-        #없으면 폴더 생성
+        # 없으면 폴더 생성
         os.makedirs(os.path.join(savePath))
 except OSError as e:
     # 에러 내용
@@ -47,9 +44,8 @@ else:
     print("folder is created!")
 
 
-
 # bs4 초기화
-soup = BeautifulSoup(res,"html.parser")
+soup = BeautifulSoup(res.content, "html.parser")
 
 # print(soup.prettify())    # 확인용임
 
@@ -70,7 +66,5 @@ for i, img in enumerate(img_list, 1):
     # 파일명 확인
     # print(fullfileName)
 
-
     # 다운로드 요청(url, 다운로드 경로)
-    req.urlretrieve(img['data-source'],fullfileName)
-
+    req.urlretrieve(img['data-source'], fullfileName)

@@ -15,94 +15,68 @@ print('soup', type(soup))  # soup <class 'bs4.BeautifulSoup'>
 # print(soup.prettify())
 
 # -----------------------------------------------------------------------------
+# 태그명으로 정보 찾기
 
-
-# 타이틀 태그 전체 출력
+print("\n---- 태그로 정보 찾기")
 print("title >> {}".format(soup.title))
 # 타이틀 태그 내용 출력
 print("title text >> {}".format(soup.title.string))
 # 타이틀 태그의 부모 태그 출력
 print("title parent >> {}".format(soup.title.parent))  # <head> ~ </head>
 
+# --------------------------------------------------------------------------------
+print("\n---- h1 태그 찾기")
+print("h1 >> {}".format(soup.h1))
+print("h1 text >> {}".format(soup.h1.string))
 
 # --------------------------------------------------------------------------------
-
-# find 를 사용하는 경우
-print("\nfind() 사용")
-print("title >> {}".format(soup.find("title")))
-print("title text >> {}".format(soup.find("title").string))
+print("\n---- h2 태그 찾기")
+print("h2 >> {}".format(soup.h2))
+print("h2 text >> {}".format(soup.h2.string))
 
 # --------------------------------------------------------------------------------
-
-# h1 태그 접근
-print()
-# h1 = soup.html.body.h1
-h1 = soup.body.h1
-print("h1 >>", h1)
-
-# 첫번째 p 태그 접근
-print()
-# p1 = soup.html.body.p
+print("\n---- p 태그 찾기")
 p1 = soup.p
-print("p1 >>> ", p1)
-# 첫번째 p가 가지고 있는 클래스명 구하기
-print("p1 class >>> ", p1['class'])
+print("p >> {}".format(p1))
+print("p text >> {}".format(p1.string))
+print("p class >> {}".format(p1['class']))
 
 # --------------------------------------------------------------------------------
-
-# find 를 사용하는 경우
-print("\nfind() 사용")
-print("title >> {}".format(soup.find("h1")))
-p1 = soup.find("p")
-print("p1 class >>> ", p1['class'])
-
+print("\n---- 두번째 p 태그 찾기")
+p2 = p1.find_next_sibling("p")
+print("p >> {}".format(p2))
+print("p text >> {}".format(p2.get_text()))  # string 으로는 안나옴
+print("p class >> {}".format(p2['class']))
 
 # --------------------------------------------------------------------------------
-
-
-# 두번째 p 태그 접근
-# next_sibling : p 태그 다음의 공백 의미
-print()
-p2 = p1.next_sibling.next_sibling
-print(p2.prettify())
-
+print("\n---- 세번째 p 태그 찾기")
+# p3 = p2.next_sibling.next_sibling
+p3 = p2.find_next_sibling("p")
+print("p >> {}".format(p3))
+print("p text >> {}".format(p3.get_text()))
+print("p class >> {}".format(p3['class']))
 
 # --------------------------------------------------------------------------------
-
-# 두번째 p 태그 접근 - find_next_sibling()
-# next_sibling : p 태그 다음의 공백 의미
-print("\n--next_sibling()--")
-p2 = p1.find_next_sibling()
-print(p2.prettify())
+print("\n---- b 태그 찾기")
+b = soup.b
+print("b >> {}".format(b))
+print("b text >> {}".format(b.string))
 
 # --------------------------------------------------------------------------------
-
-# 학생들 실습 - 세번째 p 태그 접근
-print()
-p1 = soup.find("p")
-p2 = p1.next_sibling.next_sibling
-p3 = p2.next_sibling.next_sibling
-print(p3.prettify())
+print("\n---- a 태그 찾기")
+a1 = soup.a
+print("a1 >> {}".format(a1))
+print("a1 text >> {}".format(a1.string))
 
 # --------------------------------------------------------------------------------
-print("\n--find_next_sibling() 두 번")
-p3 = soup.find("p").find_next_sibling().find_next_sibling()
-print(p3.prettify())
+print("\n---- 두 번째 a 태그 찾기")
+a2 = a1.find_next_sibling("a")
+print("a2 >> {}".format(a2))
+print("a2 text >> {}".format(a2.string))
 
 # --------------------------------------------------------------------------------
-# 가져온 태그가 가지고 있는 텍스트 출력
-print()
-print("h1 >>", h1.string)
-print("p1 >>", p1.string)
-print("p2 >>", p2.string)
-print("p3 >>", p3.string)
-
-
-# 함수확인 - p2에서 사용가능한 함수들
-print(dir(p2))
-
-
-# 반복 출력 확인 - p2의 다음 요소인 텍스트 엘리먼트 출력
-print()
-for v in p2.next_element:
-    print(v, end='')  # end를 안 주면 글자 한자씩 나옴
+print("\n---- 세 번째 a 태그 찾기")
+a3 = a2.find_next_sibling("a")
+print("a3 >> {}".format(a3))
+print("a3 data-io >> {}".format(a3['data-io']))
+print("a3 text >> {}".format(a3.string))

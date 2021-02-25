@@ -21,11 +21,17 @@ soup = BeautifulSoup(res.content, 'html.parser')
 
 
 stock5 = soup.select(
-    'div.aside_area.aside_popular > table > tbody > tr > th > a')
+    'div.aside_area.aside_popular > table > tbody > tr')
 
 # 필요 데이터 활용하기
 for item in stock5:
-    print(item.get_text())
+
+    # 종목명
+    stock_name = item.select_one("a").string
+    # 현재 금액
+    stock_price = item.select_one("td").string
+
+    print(stock_name, stock_price)
 
 # copy selector
 # #container > div.aside > div.group_aside > div.aside_area.aside_popular > table > tbody > tr:nth-child(1) > th > a

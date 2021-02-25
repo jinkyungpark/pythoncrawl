@@ -1,10 +1,16 @@
+# BeautifulSoup
+# 다양한 파서 사용 가능(html.parser, lxml,....)
+# 태그, 이름, 속성(아이디, 클래스)로 원하는 요소를 찾을 수 있음
+# 
+
+
 import requests
 from bs4 import BeautifulSoup
 
-# 페이지 요청 - 위키피디아 서울지히철
+# 페이지 요청 - 다음 뉴스
 
 res = requests.get(
-    "https://ko.wikipedia.org/wiki/%EC%84%9C%EC%9A%B8_%EC%A7%80%ED%95%98%EC%B2%A0")
+    "https://news.v.daum.net/v/20210225191120893")
 
 soup = BeautifulSoup(res.text, "html.parser")
 

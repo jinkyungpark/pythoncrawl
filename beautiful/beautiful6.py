@@ -1,31 +1,73 @@
-# 클리앙 제목과 날짜 추출 후 엑셀 저장하기
-from bs4 import BeautifulSoup
-import requests
-import xlsx_write as excel
-# 팁과 강좌 2page
-url = 'https://www.clien.net/service/board/lecture?&od=T31&po=1'
+# css 선택자 : select, select_one 이용하기
+# 태그 선택자 : find, find_all
+# select / select_one
+# 태그 + 클래스 + 자식 선택자
+from bs4 import BeautifulSoup  # beautifulsoup4
 
-res = requests.get(url)
-soup = BeautifulSoup(res.content, 'html.parser')
+# html 변수에 들어있는 값이 예를 들어 웹에서 가져온 소스라고 할 때
+with open("./beautiful/story.html", "r") as f1:
+    html = f1.read()
 
-# 하나의 행 가져오기
-data = soup.select('div.list_content > div.list_item.symph_row')
+# bs4 초기화 - 웹에서 가져온 문서를 첫번째 인자로, 문서의 구조를 두번째 인자로
+soup = BeautifulSoup(html, 'html.parser')
 
-# 빈 리스트 선언하기
-board_lists = list()
+link5 = soup.select_one('p.title > b')
+print()
+print(link5)
+print(link5.string)
+print(link5.text)
 
-for item in data:
-    # 가져온 하나의 행에서 타이틀과 시간 가져오기
-    title = item.select_one(
-        'div.list_title > a.list_subject > span.subject_fixed')
-    time = item.select_one('div.list_time > span')
+# id가 link1인 태그 가져오기
+link6 = soup.select_one("a#link1")
+print()
+print(link6)
+print(link6.string)
+print(link6.text)
 
-    # print(title.get_text())
-    # print(time.get_text().strip()[:5])  # 날짜에 숨겨진 시분초까지 나와서
+# 속성을 이용하여 태그 가져오기
+link7 = soup.select_one("a[data-io='link3']")
+print()
+print(link7)
+print(link7.string)
+print(link7.text)
 
-    # 한 행 구성하기
-    board_content = [title.get_text().strip(), time.get_text().strip()[:5]]
-    # 각각의 행을 붙여 시트에 붙일 상태로 만들기
-    board_lists.append(board_content)
+# 전체 선택
+link8 = soup.select("p.story > a")
+print("****\n p.story > a\n")
+print(link8)
+# print(link8.string)  # 여러개를 가지고 오기 때문에 에러남
+# print(link8.text) # 여러개를 가지고 오기 때문에 에러남
 
-excel.write_excel_template('tmp2.xlsx', '기사제목', board_lists)
+# 개별 a 태그로 출력
+for link in link8:
+    print(link)
+    print(link.string)
+
+
+# a 태그 두번째
+link9 = soup.select('p.story > a:nth-of-type(2)')
+print("***\n\n p.story > a:nth-of-type(2)\n")
+print('link9', link9)
+
+# p.story 를 가진 게 두 개가 있음
+link10 = soup.select('p.story')
+print("***\n\n p.story\n")
+print(link10)
+
+
+# 위의 예에서 만일 string 출력을 하고 싶다면?
+for t in link10:
+    temp = t.find_all('a')
+
+    if temp:
+        for v in temp:
+            print('>>>>>', v)
+            print('>>>>>', v.string)
+    else:
+        print('-----', t)
+        print('-----', t.string)
+
+
+# 현재 html 문서의 모든 텍스트만 가져오려면?
+print("텍스트 모두 출력")
+print(soup.get_text())

@@ -1,8 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
+
+userAgent = UserAgent()
+headers = {
+    'user-agent': userAgent.chrome
+}
+
 
 # 웹 페이지 가져오기
-res = requests.get('https://finance.naver.com/')
+res = requests.get('https://finance.naver.com/', headers=headers)
 
 # print(res.content)  # 페이지를 전부 가져오는 건 의미 없음
 

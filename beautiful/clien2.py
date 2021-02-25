@@ -22,7 +22,7 @@ for item in data:
     # 시간 가져오기
     time = item.select_one("div.list_time > span > span")
 
-    # print(title.get_text().strip(), time.get_text().strip()[:10])
+    print(title.get_text().strip(), time.get_text().strip()[:10])
 
     # 하나의 행 구성하기
     board_title = [title.get_text().strip(), time.get_text().strip()[:10]]
