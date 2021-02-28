@@ -1,7 +1,7 @@
-import openpyxl
+from openpyxl import Workbook
 
 # openpyxl WorkBook 객체 생성
-excel_file = openpyxl.Workbook()
+excel_file = Workbook()
 
 # 디폴트 시트 활성화하기
 sheet1 = excel_file.active
@@ -14,4 +14,4 @@ for row in rows:
     sheet1.append(row)
 
 
-excel_file.save("./resource/test3.xlsx")
+excel_file.save("./resources/test3.xlsx")

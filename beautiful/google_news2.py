@@ -79,3 +79,5 @@ def data_extract(soup):
 
 if __name__ == "__main__":
     main()
+
+# %%

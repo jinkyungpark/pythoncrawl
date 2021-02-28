@@ -1,7 +1,7 @@
-import openpyxl
+from openpyxl import Workbook
 
 # openpyxl WorkBook 객체 생성
-excel_file = openpyxl.Workbook()
+excel_file = Workbook()
 print(excel_file.sheetnames)
 
 # 기존 시트 하나 없애기
@@ -14,4 +14,4 @@ sheet1 = excel_file.create_sheet(index=0, title="Column")
 sheet2 = excel_file.create_sheet(index=1, title="매출표")
 print(excel_file.sheetnames)
 
-excel_file.save("./resource/test2.xlsx")
+excel_file.save("./resources/test2.xlsx")

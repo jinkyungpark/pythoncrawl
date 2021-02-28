@@ -1,9 +1,9 @@
-import openpyxl
+from openpyxl import Workbook
 import openpyxl.utils.cell as utils
 from openpyxl.styles import Alignment, Font
 
 # openpyxl WorkBook 객체 생성
-excel_file = openpyxl.Workbook()
+excel_file = Workbook()
 print(excel_file.sheetnames)
 
 # 기존 시트 하나 없애기
@@ -39,4 +39,4 @@ for row in sheet2.iter_cols(min_col=1, max_col=3, min_row=1, max_row=6):
         each_cell.font = Font(italic=True, name="Consoras",
                               size=10, color='ff0000')
 
-excel_file.save("./resource/test2.xlsx")
+excel_file.save("./resources/test2.xlsx")

@@ -4,10 +4,10 @@
 # pip install xlrd
 # pip install openpyxl
 # pip install pandas
-import openpyxl
+from openpyxl import load_workbook
 
 # openpyxl을 이용해서 엑셀 파일 오픈
-excel_file = openpyxl.load_workbook("./resource/sample.xlsx")
+excel_file = load_workbook("./resources/sample.xlsx")
 print(excel_file)
 print(type(excel_file))
 print(excel_file.sheetnames)

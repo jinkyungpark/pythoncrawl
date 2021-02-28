@@ -1,3 +1,4 @@
+# 클리앙 제목과 날짜 추출 후 엑셀 저장하기
 import requests
 from bs4 import BeautifulSoup
 import xlsx_write as excel

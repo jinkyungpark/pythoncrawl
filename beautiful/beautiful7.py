@@ -1,31 +1,25 @@
-# 클리앙 제목과 날짜 추출 후 엑셀 저장하기
-from bs4 import BeautifulSoup
 import requests
-import xlsx_write as excel
-# 팁과 강좌 2page
-url = 'https://www.clien.net/service/board/lecture?&od=T31&po=1'
+from bs4 import BeautifulSoup
 
-res = requests.get(url)
-soup = BeautifulSoup(res.content, 'html.parser')
+# 페이지 요청 - 위키피디아 서울지히철 사진 저장
+with requests.Session() as s:
+    res = s.get(
+        "https://ko.wikipedia.org/wiki/%EC%84%9C%EC%9A%B8_%EC%A7%80%ED%95%98%EC%B2%A0")
 
-# 하나의 행 가져오기
-data = soup.select('div.list_content > div.list_item.symph_row')
+    soup = BeautifulSoup(res.text, "html.parser")
 
-# 빈 리스트 선언하기
-board_lists = list()
+    # 사진 영역 가져오기
+    target_image = soup.select_one(
+        "div.mw-parser-output > table.infobox > tbody > tr > td > a > img")
+    print()
+    print(target_image.get('src'))
+    print(target_image['src'])
 
-for item in data:
-    # 가져온 하나의 행에서 타이틀과 시간 가져오기
-    title = item.select_one(
-        'div.list_title > a.list_subject > span.subject_fixed')
-    time = item.select_one('div.list_time > span')
+    # 사진 요청하기
+    download = s.get("https:"+target_image.get('src'))
 
-    # print(title.get_text())
-    # print(time.get_text().strip()[:5])  # 날짜에 숨겨진 시분초까지 나와서
+    with open("d:/image/subway1.jpg", "wb") as f:
+        f.write(download.content)
 
-    # 한 행 구성하기
-    board_content = [title.get_text().strip(), time.get_text().strip()[:5]]
-    # 각각의 행을 붙여 시트에 붙일 상태로 만들기
-    board_lists.append(board_content)
 
-excel.write_excel_template('tmp2.xlsx', '기사제목', board_lists)
+#mw-content-text > div.mw-parser-output > div.thumb.tright > div > a > img

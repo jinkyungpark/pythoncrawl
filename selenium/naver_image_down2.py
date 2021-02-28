@@ -6,6 +6,7 @@ import requests
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 import urllib.request as req
+import time
 
 # Header 정보 초기화
 userAgent = UserAgent()
@@ -19,9 +20,13 @@ base = 'https://search.naver.com/search.naver?where=image&sm=tab_jum'
 param = {"query": "트럭"}
 
 
+# time.sleep(5)
+
 # Request
 res = requests.get(base, params=param, headers=headers)
 
+
+time.sleep(10)
 
 # 이미지 저장 경로
 savePath = "c:\\imagedown\\"
@@ -50,21 +55,23 @@ soup = BeautifulSoup(res.content, "html.parser")
 # print(soup.prettify())    # 확인용임
 
 
-#  a.thumb._thumb > img
-img_list = soup.select('div.img_area > a.thumb._thumb > img')
+#  #main_pack > section > div._contentRoot.image_wrap > div.photo_group._listGrid > div.photo_tile._grid > div:nth-child(1) > div > div.thumb > a > img
+
+img_list = soup.select(
+    '.sc_new div._contentRoot')
 print(img_list)
 
 
 # 반복문을 사용하여 이미지 경로 가져오기
-for i, img in enumerate(img_list, 1):
-    # 속성확인
-    print()
-    print()
-    print(img['data-source'], i)
-    # 저장 파일명 및 경로
-    fullfileName = os.path.join(savePath, savePath+str(i)+'.png')
-    # 파일명 확인
-    # print(fullfileName)
+# for i, img in enumerate(img_list, 1):
+#     # 속성확인
+#     print()
+#     print()
+#     print(img['data-source'], i)
+#     # 저장 파일명 및 경로
+#     fullfileName = os.path.join(savePath, savePath+str(i)+'.png')
+#     # 파일명 확인
+#     # print(fullfileName)
 
-    # 다운로드 요청(url, 다운로드 경로)
-    req.urlretrieve(img['data-source'], fullfileName)
+#     # 다운로드 요청(url, 다운로드 경로)
+#     req.urlretrieve(img['data-source'], fullfileName)

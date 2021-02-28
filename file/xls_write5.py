@@ -1,7 +1,8 @@
-import openpyxl
 from PIL import Image
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image
 # openpyxl WorkBook 객체 생성
-excel_file = openpyxl.Workbook()
+excel_file = Workbook()
 
 # 디폴트 시트 활성화하기
 sheet1 = excel_file.active
@@ -17,11 +18,11 @@ rows = [['홍길동', '801020'],
 # ws.add_image(img)
 
 for idx, row in enumerate(rows, 2):
-    img = openpyxl.drawing.image.Image('./resource/cat.png')
+    img = Image('./resources/cat.png')
     img.width = 30
     img.height = 20
     sheet1.append(row)
     sheet1.add_image(img, 'C'+str(idx))
 
 
-excel_file.save("./resource/test4.xlsx")
+excel_file.save("./resources/test4.xlsx")

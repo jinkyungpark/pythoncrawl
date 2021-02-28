@@ -1,4 +1,4 @@
-import openpyxl
+from openpyxl import Workbook
 
 # 엑셀파일 저장하는 부분 함수 작성
 
@@ -6,7 +6,7 @@ import openpyxl
 def write_excel_template(filename, sheetname, listdata):
 
     # Workbook()으로 엑셀 파일 생성
-    excel_file = openpyxl.Workbook()
+    excel_file = Workbook()
 
     # 엑셀 파일이 생성되면 디폴트 시트가 생성되며, 엑셀파일변수.active 로 해당 시트 선택
     excel_sheet = excel_file.active
@@ -27,3 +27,8 @@ def write_excel_template(filename, sheetname, listdata):
 
     # 엑셀 파일 닫기
     excel_file.close()
+
+
+if __name__ == "__main__":
+    listdata = [["이름", "나이"], ["홍길동", 25], ["김지수", 23], ["신지호", 26]]
+    write_excel_template("temp2.xlsx", "test", listdata)
