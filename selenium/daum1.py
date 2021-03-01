@@ -3,10 +3,10 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 # exe 생략가능
-driver = webdriver.Chrome("d:/chromedriver/chromedriver.exe")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(3)
 
-driver.get("https://www.daum.net")
+driver.get("https://www.daum.net/")
 
 # ---------------------------------------------------------- 1차 확인
 
@@ -21,7 +21,7 @@ assert "Daum" in driver.title
 
 # ---------------------------------------------------------- 3차 확인
 
-print()
+# print()
 print('Session ID : {}'.format(driver.session_id))
 print('Title : {}'.format(driver.title))
 print('URL : {}'.format(driver.current_url))

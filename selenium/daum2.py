@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-driver = webdriver.Chrome("d:/chromedriver/chromedriver.exe")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(3)
 
 # 특정 사이트 접속

@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 # 드라이버 생성
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 # ---------------------------------------------------------------------------------------
 # 접속할 사이트 주소 넣어주기

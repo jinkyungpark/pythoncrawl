@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 # 드라이버 생성
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 driver.implicitly_wait(2)
 driver.maximize_window()

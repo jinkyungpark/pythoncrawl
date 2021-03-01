@@ -3,7 +3,7 @@
 from selenium import webdriver
 
 # webdriver 설정
-driver = webdriver.Chrome('d:/chromedriver/chromedriver.exe')
+driver = webdriver.Chrome('./webdriver/chrome/chromedriver')
 
 # 크롬 브라우저 내부 대기
 # 인터넷 속도가 서로 다르고 컴퓨터 환경이 다르기 때문에 시간을 줘야 함
