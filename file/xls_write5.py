@@ -1,4 +1,3 @@
-from PIL import Image
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image
 # openpyxl WorkBook 객체 생성

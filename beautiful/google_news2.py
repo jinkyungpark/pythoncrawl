@@ -6,11 +6,9 @@ import requests
 from urllib.error import HTTPError
 
 
-def main():
+def main(keyword):
 
     try:
-
-        keyword = input("검색어를 입력하세요 : ")
 
         # 요청 가져오기
         api = "https://news.google.com/search?q="+keyword+"&hl=ko&gl=KR&ceid=KR%3Ako"
@@ -57,11 +55,11 @@ def data_extract(soup):
             "a").get_text()
 
         # time 이 없는 경우가 있음
-        report_date_time = report_time_date_writer.select("time")
+        report_date_time = report_time_date_writer.select_one("time")
         # [<time class="WW6dff uQIVzc Sksgp" datetime="2020-08-26T09:38:50Z">2일 전</time>]
 
         if report_date_time:
-            report_date_time = (report_date_time[0])["datetime"].split("T")
+            report_date_time = report_date_time["datetime"].split("T")
             news_item["report_date"] = report_date_time[0]
             news_item["report_time"] = report_date_time[1][:-1]
         else:
@@ -78,6 +76,6 @@ def data_extract(soup):
 
 
 if __name__ == "__main__":
-    main()
+    main("python")
 
 # %%
