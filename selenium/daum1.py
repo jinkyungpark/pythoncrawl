@@ -4,9 +4,9 @@ import time
 
 # exe 생략가능
 driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
-driver.implicitly_wait(3)
 
 driver.get("https://www.daum.net/")
+driver.implicitly_wait(3)
 
 # ---------------------------------------------------------- 1차 확인
 

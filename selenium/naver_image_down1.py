@@ -26,6 +26,7 @@ print('Request URL : {}'.format(url))
 
 # Request
 res = req.urlopen(url)
+print(res.read())
 
 time.sleep(10)
 
@@ -52,7 +53,7 @@ else:
 
 # bs4 초기화
 soup = BeautifulSoup(res, "html.parser")
-
+print(soup.text)
 # print(soup.prettify())    # 확인용임
 
 

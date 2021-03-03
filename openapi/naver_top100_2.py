@@ -1,5 +1,4 @@
 import requests
-import json
 
 client_id = '6_FpNFqYVz7PeiPV7Omd'
 client_secret = 'S7f9ozjfRZ'
@@ -21,7 +20,7 @@ start, num = 1, 0
 for idx in range(10):
     start_num = start + (idx*100)
 
-    naver_open_api = 'https://openapi.naver.com/v1/search/shop.json?query=샤오미&display=100&start=' + \
+    naver_open_api = 'https://openapi.naver.com/v1/search/shop.json?query=아이폰&display=100&start=' + \
         str(start_num)
     # print(naver_open_api)
 
@@ -32,6 +31,7 @@ for idx in range(10):
     if res.status_code == 200:
         for item in data['items']:
             num += 1
+            title = item['title']
             print(num, item['title'], item['link'])
     else:
         print("Error code : ", res.status_code)
