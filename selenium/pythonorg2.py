@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import time
 
 # 드라이버 생성
@@ -24,8 +25,11 @@ assert "Python" in driver.title
 # ---------------------------------------------------------------------------------------
 # 검색어에 python 넣고 결과 보기
 
-# 해당 태그를 이름으로 찾기
-elem = driver.find_element_by_name("q")
+# 해당 태그를 이름으로 찾기 - 방법 ①
+elem = driver.find_element(By.NAME, "q")
+
+# 해당 태그를 이름으로 찾기 - 방법 ②
+# elem = driver.find_element_by_name("q")
 # input 텍스트 초기화
 elem.clear()
 
@@ -45,7 +49,10 @@ time.sleep(2)
 # assert "No results found." not in driver.page_source
 
 # 검색결과를 받아와서 출력하기
-titles = driver.find_elements_by_tag_name("h3")
+# 해당 태그를 이름으로 찾기 - 방법 ①
+titles = driver.find_elements(By.TAG_NAME, "h3")
+
+# titles = driver.find_elements_by_tag_name("h3")
 
 for title in titles:
     print(title.text)

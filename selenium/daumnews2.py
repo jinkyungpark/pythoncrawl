@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 
 # webdrvier 로드
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 
 driver = webdriver.Chrome(chromedriver)
 # 정보를 추출할 페이지 가져오기

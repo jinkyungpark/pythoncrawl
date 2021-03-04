@@ -13,7 +13,7 @@ from selenium.common.exceptions import TimeoutException
 import time
 
 
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 headless_options = webdriver.ChromeOptions()
 # headless_options.add_argument("headless")  # --headless 도 됨
 # 그래픽 카드 쓰지 않겠다

@@ -6,7 +6,7 @@
 from selenium import webdriver
 
 # webdriver 설정
-browser = webdriver.Chrome('d:/chromedriver/chromedriver.exe')
+browser = webdriver.Chrome('./webdriver/chrome/chromedriver')
 
 # ------------------------ (웹드라이버 구동 여부)
 

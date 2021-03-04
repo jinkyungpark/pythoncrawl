@@ -16,4 +16,4 @@ elem.send_keys(Keys.RETURN)
 assert "No results found." not in driver.page_source
 # ---------------------------------------------------------------------------------------
 time.sleep(2)
-driver.quit()
+driver.quit()  # 세션 종료

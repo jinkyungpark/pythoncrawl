@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-driver = webdriver.Chrome("d:/webdriver/chromedriver.exe")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 
 driver.get("https://www.facebook.com/")
 

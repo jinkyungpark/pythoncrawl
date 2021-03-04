@@ -7,7 +7,7 @@ import time
 from bs4 import BeautifulSoup
 
 # webdriver 설정
-driver = webdriver.Chrome("d:/chromedriver/chromedriver.exe")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(5)
 driver.maximize_window()
 

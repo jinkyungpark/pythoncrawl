@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # 과정 추출하기 - 팝업창 닫기와 WebdriverWait 사용
 
 # 웹드라이버 로드
-driver = webdriver.Chrome("d:/webdriver/chromedriver.exe")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.maximize_window()
 
 driver.implicitly_wait(3)
@@ -29,7 +29,8 @@ for pop in popups:
 try:
     # 통합검색창 클릭 -> 영어 입력 후 엔터
     search = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "search_btn"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ".a-search-box > span"))
     )
     search.click()
 

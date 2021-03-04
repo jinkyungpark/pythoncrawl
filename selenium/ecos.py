@@ -2,7 +2,7 @@ from selenium import webdriver
 import time
 
 
-driver = webdriver.Chrome("d:/chromedriver/chromedriver")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(3)
 
 

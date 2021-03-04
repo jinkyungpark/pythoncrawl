@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 # 드라이버 로드
-driver = webdriver.Chrome("d:/chromedriver/chromedriver")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.maximize_window()
 # 사이트 접속하기
 driver.get("http://sll.seoul.go.kr/")
@@ -12,25 +12,28 @@ driver.get("http://sll.seoul.go.kr/")
 print(driver.title)   # THE SCRAPINGHUB BLOG
 assert "서울시평생학습포털" in driver.title
 
+
+# 팝업창 닫기 2021-03-05
+driver.find_element_by_xpath("//*[@id='close2_14324326']/img").click()
+
+
 # 통합검색 클릭
-driver.find_element_by_id("search_btn").click()
+time.sleep(2)
+driver.find_element_by_css_selector(
+    ".a-search-box > span").click()
 
 # 큰 검색창이 뜨면 그 안에 영어 검색어 넣고 엔터
 element = driver.find_element_by_id("query")
-
 element.send_keys("영어")
 
 time.sleep(2)
-
 element.send_keys(Keys.RETURN)
 
 # 검색결과가 새창으로 뜨는 시간 기다리기
 time.sleep(3)
 
-
 # 최근 열린 탭으로 전환 driver.window_handles[0]  => 현재 창
 driver.switch_to.window(driver.window_handles[1])
-
 
 # 로딩 기다리기
 print("new window : {}".format(driver.current_url))
@@ -39,7 +42,6 @@ print("new window : {}".format(driver.current_url))
 more = driver.find_element_by_css_selector(
     "div.search-result-title > a.btn-more-result").click()
 
-time.sleep(5)
-
+time.sleep(2)
 # 브라우저 종료
 driver.quit()

@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 # webdrvier 로드
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 
 headless_options = webdriver.ChromeOptions()
 headless_options.add_argument("headless")  # --headless 도 됨

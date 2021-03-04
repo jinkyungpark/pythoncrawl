@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 headless_options = webdriver.ChromeOptions()
 # headless_options.add_argument("headless")
 # 그래픽 카드 쓰지 않겠다

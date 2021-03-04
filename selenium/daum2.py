@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(3)
@@ -18,7 +19,8 @@ assert "Daum" in driver.title
 
 # ---------------------------------------------------------- 3차 확인
 
-elem = driver.find_element_by_name("q")
+elem = driver.find_element(By.NAME, "q")
+# elem = driver.find_element_by_name("q")
 
 
 elem.send_keys("아이폰")

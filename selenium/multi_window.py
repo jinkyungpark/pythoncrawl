@@ -2,7 +2,7 @@ from selenium import webdriver
 import time
 
 # 드라이버 로드
-driver = webdriver.Chrome("d:/chromedriver/chromedriver")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.maximize_window()
 # 사이트 접속하기
 driver.get("https://google.com")
@@ -24,7 +24,7 @@ child_window = [window for window in all_windows if window != parent_window][0]
 print("child_window info : {}".format(child_window))
 
 # 자식 창으로 제어권 이동
-driver.switch_to_window(child_window)
+driver.switch_to.window(child_window)
 print("현재 창 : {}".format(driver.title))
 
 time.sleep(3)

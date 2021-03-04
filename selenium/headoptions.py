@@ -1,7 +1,7 @@
 from selenium import webdriver
 
 
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 
 options = webdriver.ChromeOptions()
 # 브라우저 안 띄우기

@@ -4,7 +4,7 @@ import time
 
 
 # webdrvier 로드
-chromedriver = "d:/chromedriver/chromedriver.exe"
+chromedriver = "./webdriver/chrome/chromedriver"
 # option = webdriver.ChromeOptions()
 # option.add_argument("--headless")
 # driver = webdriver.Chrome(chromedriver, chrome_options=option)

@@ -6,7 +6,7 @@ import time
 options = webdriver.ChromeOptions()
 options.add_argument("headless")
 driver = webdriver.Chrome(
-    "d:/chromedriver/chromedriver.exe", chrome_options=options)
+    "./webdriver/chrome/chromedriver", chrome_options=options)
 driver.implicitly_wait(3)
 
 driver.get("https://www.daum.net")
