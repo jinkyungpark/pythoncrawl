@@ -1,8 +1,8 @@
 import sqlite3
 import datetime
 
-# database 생성
-conn = sqlite3.connect("./database/test.db", isolation_level=None)
+# database 연결
+conn = sqlite3.connect("./db/test.db", isolation_level=None)
 
 # 커서 획득
 cursor = conn.cursor()
