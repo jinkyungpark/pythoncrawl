@@ -2,10 +2,10 @@
 import scrapy
 
 
-class Hubspider1Spider(scrapy.Spider):
-    name = 'hubspider1'
-    allowed_domains = ['blog.scrapinghub.com']
-    start_urls = ['http://blog.scrapinghub.com/']
+class Zytespider1Spider(scrapy.Spider):
+    name = 'zytespider1'
+    allowed_domains = ['www.zyte.com/blog']
+    start_urls = ['http://www.zyte.com/blog/']
 
     def parse(self, response):
         # print(response.text)

@@ -772,4 +772,286 @@
         <no>64</no>
         <title>Bootstrap Exercises</title>
     </item>
+</items><?xml version="1.0" encoding="utf-8"?>
+<items>
+    <item>
+        <no>1</no>
+        <title>Learn HTML</title>
+    </item>
+    <item>
+        <no>2</no>
+        <title>Learn CSS</title>
+    </item>
+    <item>
+        <no>3</no>
+        <title>Learn Bootstrap</title>
+    </item>
+    <item>
+        <no>4</no>
+        <title>Learn W3.CSS</title>
+    </item>
+    <item>
+        <no>5</no>
+        <title>Learn Colors</title>
+    </item>
+    <item>
+        <no>6</no>
+        <title>Learn Icons</title>
+    </item>
+    <item>
+        <no>7</no>
+        <title>Learn Graphics</title>
+    </item>
+    <item>
+        <no>8</no>
+        <title>Learn How To</title>
+    </item>
+    <item>
+        <no>9</no>
+        <title>Learn Sass</title>
+    </item>
+    <item>
+        <no>10</no>
+        <title>Learn JavaScript</title>
+    </item>
+    <item>
+        <no>11</no>
+        <title>Learn jQuery</title>
+    </item>
+    <item>
+        <no>12</no>
+        <title>Learn React</title>
+    </item>
+    <item>
+        <no>13</no>
+        <title>Learn AngularJS</title>
+    </item>
+    <item>
+        <no>14</no>
+        <title>Learn JSON</title>
+    </item>
+    <item>
+        <no>15</no>
+        <title>Learn AJAX</title>
+    </item>
+    <item>
+        <no>16</no>
+        <title>Learn HTML-DOM</title>
+    </item>
+    <item>
+        <no>17</no>
+        <title>Learn AppML</title>
+    </item>
+    <item>
+        <no>18</no>
+        <title>Learn W3.JS</title>
+    </item>
+    <item>
+        <no>19</no>
+        <title>Learn SQL</title>
+    </item>
+    <item>
+        <no>20</no>
+        <title>Learn PHP</title>
+    </item>
+    <item>
+        <no>21</no>
+        <title>Learn ASP</title>
+    </item>
+    <item>
+        <no>22</no>
+        <title>Learn Node.js</title>
+    </item>
+    <item>
+        <no>23</no>
+        <title>Learn Raspberry Pi</title>
+    </item>
+    <item>
+        <no>24</no>
+        <title>Learn Python</title>
+    </item>
+    <item>
+        <no>25</no>
+        <title>Learn Java</title>
+    </item>
+    <item>
+        <no>26</no>
+        <title>Learn C++</title>
+    </item>
+    <item>
+        <no>27</no>
+        <title>Learn C#</title>
+    </item>
+    <item>
+        <no>28</no>
+        <title>Learn R</title>
+    </item>
+    <item>
+        <no>29</no>
+        <title>Learn AI</title>
+    </item>
+    <item>
+        <no>30</no>
+        <title>Learn Machine Learning</title>
+    </item>
+    <item>
+        <no>31</no>
+        <title>Learn Data Science</title>
+    </item>
+    <item>
+        <no>32</no>
+        <title>Learn Pandas</title>
+    </item>
+    <item>
+        <no>33</no>
+        <title>Web Templates</title>
+    </item>
+    <item>
+        <no>34</no>
+        <title>Web Statistics</title>
+    </item>
+    <item>
+        <no>35</no>
+        <title>Web Certificates</title>
+    </item>
+    <item>
+        <no>36</no>
+        <title>Web Editor</title>
+    </item>
+    <item>
+        <no>37</no>
+        <title>Web Development</title>
+    </item>
+    <item>
+        <no>38</no>
+        <title>Test Your Typing Speed</title>
+    </item>
+    <item>
+        <no>39</no>
+        <title>Learn XML</title>
+    </item>
+    <item>
+        <no>40</no>
+        <title>Learn XML AJAX</title>
+    </item>
+    <item>
+        <no>41</no>
+        <title>Learn XML DOM</title>
+    </item>
+    <item>
+        <no>42</no>
+        <title>Learn XML DTD</title>
+    </item>
+    <item>
+        <no>43</no>
+        <title>Learn XML Schema</title>
+    </item>
+    <item>
+        <no>44</no>
+        <title>Learn XSLT</title>
+    </item>
+    <item>
+        <no>45</no>
+        <title>Learn XPath</title>
+    </item>
+    <item>
+        <no>46</no>
+        <title>Learn XQuery</title>
+    </item>
+    <item>
+        <no>47</no>
+        <title>HTML Reference</title>
+    </item>
+    <item>
+        <no>48</no>
+        <title>CSS Reference</title>
+    </item>
+    <item>
+        <no>49</no>
+        <title>JS Reference</title>
+    </item>
+    <item>
+        <no>50</no>
+        <title>SQL Reference</title>
+    </item>
+    <item>
+        <no>51</no>
+        <title>PHP Reference</title>
+    </item>
+    <item>
+        <no>52</no>
+        <title>jQuery Reference</title>
+    </item>
+    <item>
+        <no>53</no>
+        <title>Python Reference</title>
+    </item>
+    <item>
+        <no>54</no>
+        <title>Bootstrap 3 Reference</title>
+    </item>
+    <item>
+        <no>55</no>
+        <title>Bootstrap 4 Reference</title>
+    </item>
+    <item>
+        <no>56</no>
+        <title>W3.CSS Reference</title>
+    </item>
+    <item>
+        <no>57</no>
+        <title>Java Reference</title>
+    </item>
+    <item>
+        <no>58</no>
+        <title>Angular Reference</title>
+    </item>
+    <item>
+        <no>59</no>
+        <title>Sass Reference</title>
+    </item>
+    <item>
+        <no>60</no>
+        <title>UTF-8 Reference</title>
+    </item>
+    <item>
+        <no>61</no>
+        <title>HTML Exercises</title>
+    </item>
+    <item>
+        <no>62</no>
+        <title>CSS Exercises</title>
+    </item>
+    <item>
+        <no>63</no>
+        <title>JavaScript Exercises</title>
+    </item>
+    <item>
+        <no>64</no>
+        <title>SQL Exercises</title>
+    </item>
+    <item>
+        <no>65</no>
+        <title>PHP Exercises</title>
+    </item>
+    <item>
+        <no>66</no>
+        <title>Python Exercises</title>
+    </item>
+    <item>
+        <no>67</no>
+        <title>Java Exercises</title>
+    </item>
+    <item>
+        <no>68</no>
+        <title>C++ Exercises</title>
+    </item>
+    <item>
+        <no>69</no>
+        <title>C# Exercises</title>
+    </item>
+    <item>
+        <no>70</no>
+        <title>Bootstrap Exercises</title>
+    </item>
 </items>
