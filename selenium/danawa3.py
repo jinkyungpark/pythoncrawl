@@ -35,7 +35,7 @@ chrome_options.add_argument("--headless")
 
 # 웹 드라이버 로드 -- Headless 모드(개발 다 하고 변경)
 browser = webdriver.Chrome(
-    "d:/chromedriver/chromedriver.exe", options=chrome_options)
+    "./webdriver/chrome/chromedriver", options=chrome_options)
 
 # -------------------------- 확인(브라우저가 안 뜨는지 확인 : 일반모드)
 

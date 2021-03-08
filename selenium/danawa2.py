@@ -50,18 +50,17 @@ WebDriverWait(browser, 3).until(EC.presence_of_element_located(
 
 
 WebDriverWait(browser, 3).until(EC.presence_of_element_located(
-    (By.XPATH, '//*[@id="selectMaker_simple_priceCompare_A"]/li[13]/label'))).click()
+    (By.XPATH, '//*[@id="selectMaker_simple_priceCompare_A"]/li[14]/label'))).click()
 
 time.sleep(2)    # 약간 대기 시간 주기(빨리 진행 시 에러발생 가능)
 
 # ------------------------------------------ 페이지 나누기
 
-# 현재 페이지
-cur_page = 1
+# 현재 페이지 / 크롤링할 페이지 수 (2021-03-08)
+cur_page, taget_crawl_num = 1, 6
 
-# 크롤링할 페이지 수 (2021-03-08)
-taget_crawl_num = 6
-
+# 번호 출력을 위해
+idx = 1
 
 while cur_page <= taget_crawl_num:
 
@@ -79,10 +78,10 @@ while cur_page <= taget_crawl_num:
 
     # -----------------------  메인 상품 페이지 출력
 
-    for v in pro_list:
+    for product in pro_list:
         # 광고 부분에 대해 제거하고 원하는 부분 출력
         # [0]을 안하면 리스트 구조로 가져오기 때문에 해준 것임
-        if not v.find('div', class_="ad_header"):
+        if not product.find('div', class_="ad_header"):
             prod_name = product.select_one("p.prod_name > a").text.strip()
             prod_price = product.select_one("p.price_sect > a").text.strip()
             img = product.select_one(".thumb_image img")
@@ -94,8 +93,9 @@ while cur_page <= taget_crawl_num:
             print(idx, prod_name, prod_price, "http:" + img_src)
 
             # 만일 모두 data-original 이 있다면 아래 한줄로 가능
-            # print(v.select_one("a.thumb_link > img")['data-original'])           
-        
+            # print(v.select_one("a.thumb_link > img")['data-original'])
+            idx += 1
+
     print()   # 새로운 페이지 전에 엔터
 
     # 페이지 별 스크린 샷 저장

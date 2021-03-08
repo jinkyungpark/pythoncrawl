@@ -41,7 +41,7 @@ worksheet.column_dimensions["B"].width = 18
 worksheet.append(["제품명", "가격", "이미지"])
 
 
-driver = webdriver.Chrome("./driver/chromedriver")
+driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
 driver.implicitly_wait(3)  # time.sleep(3)
 driver.get("http://prod.danawa.com/list/?cate=112758&15main_11_02")
 
@@ -75,7 +75,8 @@ try:
         soup = BeautifulSoup(driver.page_source, "html.parser")
         # print(soup.prettify())
 
-        product_list = soup.select("div.main_prodlist > ul > li:not(.product-pot)")
+        product_list = soup.select(
+            "div.main_prodlist > ul > li:not(.product-pot)")
         # print(product_list)
 
         print("****** 현재 크롤링 페이지 : {}".format(cur_page))
@@ -84,7 +85,8 @@ try:
             # 상품명 출력
             if not product.find("div", class_="ad_header"):
                 prod_name = product.select_one("p.prod_name > a").text.strip()
-                prod_price = product.select_one("p.price_sect > a").text.strip()
+                prod_price = product.select_one(
+                    "p.price_sect > a").text.strip()
                 img = product.select_one(".thumb_image img")
                 if img.get("data-original"):
                     img_src = img.get("data-original")

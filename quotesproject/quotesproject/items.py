@@ -8,7 +8,7 @@
 import scrapy
 
 
-class Scrapyproject3Item(scrapy.Item):
+class QuotesprojectItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass

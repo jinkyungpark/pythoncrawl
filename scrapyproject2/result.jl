@@ -8,3 +8,13 @@
 {"title": "Job Postings API: Stable release", "date": "July 09, 2020 "}
 {"title": "Web Scraping Basics: A Developer\u2019s Guide To Reliably Extract Data", "date": "July 07, 2020 "}
 {"title": "Extracting Article & News Data: The Importance of Data Quality", "date": "June 23, 2020 "}
+{"title": "Automatic Extraction: Better web data with less hassle", "date": "February 25, 2021"}
+{"title": "Scrapy update: Better broad crawl performance", "date": "February 18, 2021"}
+{"title": "Hi, we\u2019re Zyte!", "date": "February 2, 2021"}
+{"title": "Irish data extraction innovator unveils new name \u2013 and new AI-powered Automatic Extraction service", "date": "February 1, 2021"}
+{"title": "Large scale web scraping", "date": "January 28, 2021"}
+{"title": "Announcing the Web Data Extraction Summit 2020", "date": "December 31, 2020"}
+{"title": "Announcing The Web Data Extraction Summit 2020", "date": "December 30, 2020"}
+{"title": "A practical guide to web data QA part V: Broad crawls", "date": "September 30, 2020"}
+{"title": "Announcing the Web Data Extraction Summit 2020", "date": "September 24, 2020"}
+{"title": "News & article data extraction: Open source vs closed source solutions", "date": "September 10, 2020"}

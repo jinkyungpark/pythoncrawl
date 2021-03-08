@@ -43,20 +43,33 @@ driver.get("https://news.v.daum.net/v/20200814162840083")
 loop, count = True, 0
 
 
+# 최신순 클릭하기
+WebDriverWait(driver, 5).until(
+    # 해당 태그가 있는지 검사
+    EC.presence_of_element_located(
+        (
+            By.CSS_SELECTOR,
+            "ul.list_category > li:nth-child(3) > button",
+        )
+    )
+).click()
+
+time.sleep(2)
+
 # 다음 댓글은 20-08-14 현재 추천댓글이 먼저 보여지는 중
 # 추천 댓글은 더보기 버튼이 한 번만 나옴
 while loop and count < 10:
     try:  # 더보기 버튼을 기다리는 중
-        element = WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 5).until(
             # 해당 태그가 있는지 검사
             EC.presence_of_element_located(
                 (
                     By.CSS_SELECTOR,
-                    "#alex-area > div > div > div > div.cmt_box > div.alex_more > button",
+                    "div.alex_more > button",
                 )
             )
-        )
-        element.click()
+        ).click()
+
         count += 1
         # 다음 더 보기 버튼이 나오기 전에 해당 태그가 있는지 검사하면 안되니까
         # 잠깐 기다리기
@@ -64,5 +77,11 @@ while loop and count < 10:
     except TimeoutException:
         loop = False
 
+# 현재 댓글 리스트 가져오기
+comment_list = driver.find_elements_by_css_selector(
+    "#alex-area div.cmt_box ul.list_comment li")
 
+for num, comment in enumerate(comment_list, 1):
+    print("[{}] : {}".format(
+        num, comment.find_element_by_css_selector("div p").text))
 driver.quit()
