@@ -35,7 +35,7 @@ worksheet = workbook.active
 # 각 열 너비 조정
 worksheet.column_dimensions["A"].width = 50
 worksheet.column_dimensions["B"].width = 18
-worksheet.column_dimensions["C"].width = 10
+
 
 # 필드명 지정
 worksheet.append(["제품명", "가격", "이미지"])
