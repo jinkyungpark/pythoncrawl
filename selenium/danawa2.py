@@ -70,7 +70,8 @@ while cur_page <= taget_crawl_num:
 
     # ------------------------ 확인
 
-    pro_list = soup.select("div.main_prodlist.main_prodlist_list > ul > li")
+    # 2021-03-08 수정 : 아이템이 30개 나오고 맨 마지막에 필요없는 태그가 하나 들어감
+    pro_list = soup.select("div.main_prodlist > ul > li:not(.product-pot)")
     # print(pro_list)
 
     # 현재 페이지 출력
@@ -82,24 +83,19 @@ while cur_page <= taget_crawl_num:
         # 광고 부분에 대해 제거하고 원하는 부분 출력
         # [0]을 안하면 리스트 구조로 가져오기 때문에 해준 것임
         if not v.find('div', class_="ad_header"):
-            # 상품명
-            print()
-            print(v.select_one('p.prod_name > a').text.strip())
-
-            # 이미지 => data-original 이 있는 경우와 없는 경우가 있으며,
-            # src 로 이용할 때도 주소 부분이 다르게 들어 있음
-            img = v.select_one("a.thumb_link > img")
-            if img.get('data-original'):
-                print(img['data-original'])
+            prod_name = product.select_one("p.prod_name > a").text.strip()
+            prod_price = product.select_one("p.price_sect > a").text.strip()
+            img = product.select_one(".thumb_image img")
+            if img.get("data-original"):
+                img_src = img.get("data-original")
             else:
-                print(img['src'])
+                img_src = img.get("src")
+
+            print(idx, prod_name, prod_price, "http:" + img_src)
 
             # 만일 모두 data-original 이 있다면 아래 한줄로 가능
-            # print(v.select_one("a.thumb_link > img")['data-original'])
-
-            # 가격
-            print(v.select_one('p.price_sect > a').text.strip())
-        print()
+            # print(v.select_one("a.thumb_link > img")['data-original'])           
+        
     print()   # 새로운 페이지 전에 엔터
 
     # 페이지 별 스크린 샷 저장
