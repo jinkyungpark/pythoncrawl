@@ -95,7 +95,7 @@ while cur_page <= taget_crawl_num:
                 print(img['src'])
 
             # 만일 모두 data-original 이 있다면 아래 한줄로 가능
-            # print(v.select_one("a.thumb_link > img")[0]['data-original'])
+            # print(v.select_one("a.thumb_link > img")['data-original'])
 
             # 가격
             print(v.select_one('p.price_sect > a').text.strip())
