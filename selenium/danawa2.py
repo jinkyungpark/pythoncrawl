@@ -59,8 +59,8 @@ time.sleep(2)    # 약간 대기 시간 주기(빨리 진행 시 에러발생 �
 # 현재 페이지
 cur_page = 1
 
-# 크롤링할 페이지 수
-taget_crawl_num = 7
+# 크롤링할 페이지 수 (2021-03-08)
+taget_crawl_num = 6
 
 
 while cur_page <= taget_crawl_num:
@@ -84,21 +84,21 @@ while cur_page <= taget_crawl_num:
         if not v.find('div', class_="ad_header"):
             # 상품명
             print()
-            print(v.select('p.prod_name > a')[0].text.strip())
+            print(v.select_one('p.prod_name > a').text.strip())
 
             # 이미지 => data-original 이 있는 경우와 없는 경우가 있으며,
             # src 로 이용할 때도 주소 부분이 다르게 들어 있음
-            img = v.select("a.thumb_link > img")[0]
+            img = v.select_one("a.thumb_link > img")
             if img.get('data-original'):
                 print(img['data-original'])
             else:
                 print(img['src'])
 
             # 만일 모두 data-original 이 있다면 아래 한줄로 가능
-            # print(v.select("a.thumb_link > img")[0]['data-original'])
+            # print(v.select_one("a.thumb_link > img")[0]['data-original'])
 
             # 가격
-            print(v.select('p.price_sect > a')[0].text.strip())
+            print(v.select_one('p.price_sect > a').text.strip())
         print()
     print()   # 새로운 페이지 전에 엔터
 
