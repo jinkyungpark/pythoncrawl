@@ -1,5 +1,5 @@
 # danawa2 다른 이름으로 저장
-# 크롤링 된 정보를 엑셀로 저장하기
+# 크롤링 된 정보를 엑셀로 저장하기 - 1page만
 
 from selenium import webdriver
 import time
