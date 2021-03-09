@@ -7,7 +7,7 @@ class TestSpider(scrapy.Spider):
     name = 'test2'
 
     def start_requests(self):
-        yield scrapy.Request('https://blog.scrapinghub.com', self.parse)
+        yield scrapy.Request('https://www.zyte.com/blog', self.parse)
         yield scrapy.Request('https://www.naver.com', self.parse)
         yield scrapy.Request('https://www.daum.net', self.parse)
 
