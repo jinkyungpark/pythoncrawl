@@ -5,7 +5,7 @@ import scrapy
 class NewsspiderSpider(scrapy.Spider):
     name = 'newsspider'
     allowed_domains = ['www.computerworld.com/news/']
-    start_urls = ['http://www.computerworld.com/news//']
+    start_urls = ['http://www.computerworld.com/news/']
 
     def parse(self, response):
         print(response.url)

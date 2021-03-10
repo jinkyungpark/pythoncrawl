@@ -33,8 +33,7 @@ class Zytespider3Spider(scrapy.Spider):
         # [:10] #blog-body
         contents = response.css(
             '#blog-body > span > p::text').extract_first()[:50]
-        # print(contents)
-        yield{'contents': ''.join(contents)}  # 리스트 형태로 나오기 때문에 텍스트 형식으로 변경
+        print(contents)
 
         # items 사용
         # items = Scrapyproject3Item()
