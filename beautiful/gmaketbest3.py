@@ -60,41 +60,28 @@ for idx,item in enumerate(best_list_li,1):
     # 주소가 들어 있는 부분 하이퍼링크 걸어주기
     sheet.cell(row=i+1, column=4).hyperlink = product_name['href']
 
-# 셀 선택하기
-cell_A1 = sheet['A1']
-# 중앙정렬
-cell_A1.alignment = openpyxl.styles.Alignment(horizontal='center')
-# 글자 색상 변경
-cell_A1.font = openpyxl.styles.Font(color="01579B")
+# 서식지정
+font = Font(name="Tahoma",size=14,color="01579B")
+alignment = Alignment(horizontal='center')
 
 # 셀 선택하기
-cell_B1 = sheet['B1']
+cell_A1 = sheet1['A1']
 # 중앙정렬
-cell_B1.alignment = openpyxl.styles.Alignment(horizontal='center')
+cell_A1.alignment = alignment
 # 글자 색상 변경
-cell_B1.font = openpyxl.styles.Font(color="01579B")
+cell_A1.font = font
 
-# 셀 선택하기
-cell_C1 = sheet['C1']
-# 중앙정렬
-cell_C1.alignment = openpyxl.styles.Alignment(horizontal='center')
-# 글자 색상 변경
-cell_C1.font = openpyxl.styles.Font(color="01579B")
+cell_B1 = sheet1['B1']
+cell_B1.alignment, cell_B1.font = alignment,font
 
-# 셀 선택하기
-cell_D1 = sheet['D1']
-# 중앙정렬
-cell_D1.alignment = openpyxl.styles.Alignment(horizontal='center')
-# 글자 색상 변경
-cell_D1.font = openpyxl.styles.Font(color="01579B")
+cell_C1 = sheet1['C1']
+cell_C1.alignment, cell_C1.font = alignment,font
 
+cell_D1 = sheet1['D1']
+cell_D1.alignment, cell_D1.font = alignment,font
 
-# 셀 선택하기
-cell_E1 = sheet['E1']
-# 중앙정렬
-cell_E1.alignment = openpyxl.styles.Alignment(horizontal='center')
-# 글자 색상 변경
-cell_E1.font = openpyxl.styles.Font(color="01579B")
+cell_E1 = sheet1['E1']
+cell_E1.alignment, cell_E1.font = alignment,font
 
 gmarket_best100.save('c:\\gmarket_best100.xlsx')
 gmarket_best100.close()
