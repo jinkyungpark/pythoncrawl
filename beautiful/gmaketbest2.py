@@ -33,7 +33,9 @@ for i, item in enumerate(items, 1):
     else:
         product_company = soup.select_one('span.text__seller > a').text
 
-
+    print(idx,product_company,product_name.text,product_price.text,product_name['href'])
+    
+    
 # my
 # for i, item in enumerate(items,1):
 #     title = item.select_one('a.itemname')
