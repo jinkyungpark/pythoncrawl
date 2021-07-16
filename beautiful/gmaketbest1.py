@@ -30,6 +30,6 @@ lis_items = lis[1]
 items = lis_items.select('ul > li')
 for i, item in enumerate(items,1):
     title = item.select_one('a.itemname')
-    price = item.select_one('div.s-price > strong')
-    print(i, title.get_text(),price.get_text()) 
+    price = item.select_one("div.s-price span")
+    print(i, title.text,price.text) 
     
