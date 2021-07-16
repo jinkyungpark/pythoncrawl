@@ -20,15 +20,18 @@ lis_items = lis[1]
 items = lis_items.select('ul > li')
 for i, item in enumerate(items, 1):
     title = item.select_one('a.itemname')
-    price = item.select_one('div.s-price > strong')
+    price = item.select_one("div.s-price span")
     # a 태그에 들어있는 url 가져오기
     # print(title['href'])
     product_url = requests.get(title['href'])
     company_res = BeautifulSoup(product_url.content, 'html.parser')
-    name = company_res.select_one(
-        'div.item-topinfo > div.item-topinfo_headline > p > span > a')
-    # print(name.get_text())
-    print(i, name.get_text(), title.get_text(), price.get_text())
+    product_company = company_res.select_one("span.text")
+   
+    # AttributeError: 'NoneType' object has no attribute 'text'
+    if product_company:
+        product_company = product_company.text
+    else:
+        product_company = soup.select_one('span.text__seller > a').text
 
 
 # my
