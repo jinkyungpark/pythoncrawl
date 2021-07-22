@@ -10,10 +10,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 # 과정 추출하기 - 팝업창 닫기와 WebdriverWait 사용
 
 # 웹드라이버 로드
-driver = webdriver.Chrome("./webdriver/chrome/chromedriver")
+driver = webdriver.Chrome("./driver/chromedriver")
 driver.maximize_window()
-
-driver.implicitly_wait(3)
 
 # 정보를 추출할 사이트 접속하기
 driver.get("http://sll.seoul.go.kr/")
@@ -21,21 +19,30 @@ driver.get("http://sll.seoul.go.kr/")
 # 테스트 코드 삽입
 assert "서울시평생학습포털" in driver.title
 
-# 팝업창 닫기
-popups = driver.find_elements_by_name("btn_layer_popup_close")
-for pop in popups:
-    pop.click()
+# 팝업창 닫기 - 여러개라면
+# popups = driver.find_elements_by_name("btn_layer_popup_close")
+# for pop in popups:
+#     pop.click()
+
+popup = driver.find_element_by_name("btn_layer_popup_close")
+popup.click()
+
+time.sleep(2)
 
 try:
     # 통합검색창 클릭 -> 영어 입력 후 엔터
     search = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, ".a-search-box > span"))
+        EC.presence_of_element_located((By.CLASS_NAME, "srh-in"))
     )
     search.click()
 
+    time.sleep(3)
+
+    
+
     element = driver.find_element_by_id("query")
     element.send_keys("영어")
+    time.sleep(2)
     element.send_keys(Keys.RETURN)
 
     # 새 창으로 제어 넘기기
