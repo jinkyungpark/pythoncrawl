@@ -1,163 +1,136 @@
-# danawa2 다른 이름으로 저장
-# 크롤링 된 정보를 엑셀로 저장하기 - 1page만
-
 from selenium import webdriver
-import time
-from selenium.webdriver.common.by import By   # wait 시 필요
-from selenium.webdriver.support.ui import WebDriverWait  # 브라우저가 다 로딩될 때 기다려줌
-# 어떤 상태가 될때까지 기다려주기 위해 필요
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
+
+import time
+
 from bs4 import BeautifulSoup
 
-# 엑셀 처리 임포트
-import openpyxl
-# 이미지 바이트 처리
-from io import BytesIO
-# 이미지를 요청하기 위해
+# 엑셀 작업
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image  # Pillow 라이브러리 설치가 필요함
+
+# 이미지 요청
 import requests
+from io import BytesIO
 from fake_useragent import UserAgent
 
-
-# 엑셀 처리 선언
-workbook = openpyxl.Workbook()
-# 기본 워크 시트 활성화
-worksheet = workbook.active
-worksheet.column_dimensions['A'].width = 52
-worksheet.column_dimensions['B'].width = 18
-worksheet.column_dimensions['C'].width = 10
-worksheet.append(['제품명', '가격', '이미지'])
-
-# 크롬 브라우저 옵션 설정
-chrome_options = Options()
-# 이전까지 브라우저가 실행됐다가 꺼지는 상태였기 때문에 안하기 위해
-chrome_options.add_argument("--headless")
-
-# 웹 드라이버 로드 -- Headless 모드(개발 다 하고 변경)
-browser = webdriver.Chrome(
-    "./webdriver/chrome/chromedriver", options=chrome_options)
-
-# -------------------------- 확인(브라우저가 안 뜨는지 확인 : 일반모드)
-
-# browser = webdriver.Chrome("./webdriver/chrome/chromedriver.exe")
-
-# 크롬 브라우저 내부 대기
-browser.implicitly_wait(5)   # 여유있게 기다리겠다
-browser.set_window_size(1080, 1024)
-
-# 페이지 이동 - 실제 브라우저로 동작시켜 주소 얻어내기
-browser.get("http://prod.danawa.com/list/?cate=112758&15main_11_02")
-
-# -------------------------- 확인(노트북 페이지까지 들어간 후 화면이 닫히는 지 확인)
-
-# 1차 페이지 이동
-# print('Before Page Contents : {}'.format(browser.page_source))
+wb = Workbook()
+ws1 = wb.active
+ws1.column_dimensions["B"].width = 50
+ws1.column_dimensions["C"].width = 18
+ws1.append(["번호", "제품명", "가격", "이미지"])
 
 
-# --------------------------- 확인(페이지 소스가 나오는지 확인)
+options = webdriver.ChromeOptions()
+options.headless = True
+
+driver = webdriver.Chrome("d:\\chromedriver\\chromedriver", options=options)
+
+# driver = webdriver.Chrome("d:\\chromedriver\\chromedriver")
+
+driver.get("http://prod.danawa.com/list/?cate=112758&15main_11_02")
+
+driver.implicitly_wait(3)
+
+# 제조사별 더보기 클릭
+WebDriverWait(driver, 3).until(
+    EC.presence_of_element_located(
+        (
+            By.CSS_SELECTOR,
+            "div.spec_opt_view > button.btn_spec_view.btn_view_more",
+        )
+    )
+).click()
+
+# print(driver.page_source)
+
+# 특정 제조사 클릭 = APPLE 클릭
+WebDriverWait(driver, 2).until(
+    EC.presence_of_element_located(
+        (By.XPATH, "//*[@id='selectMaker_simple_priceCompare_A']/li[17]/label")
+    )
+).click()
 
 
-# 제조사별 더 보기 클릭1
-# 새로고침 후 페이지가 다 로드되는 시간만큼 명시적으로 기다리기
-# WebDriver가 기다릴거야 브라우저가 3초간
-# 사용자가 선택하려고 하는 버튼이 다 그려질 때까지
-
-# 여기서 준 3초만큼 기다릴건데 그때도 버튼이 안 그려지면  TimeoutException 을 발생시킴
-# 그려지면 click()를 해 줘
-WebDriverWait(browser, 3).until(EC.presence_of_element_located(
-    (By.XPATH, '//*[@id="dlMaker_simple"]/dd/div[2]/button[1]'))).click()
-
-# 13번이라 Asus 가 나옴
-WebDriverWait(browser, 3).until(EC.presence_of_element_located(
-    (By.XPATH, '//*[@id="selectMaker_simple_priceCompare_A"]/li[4]/label'))).click()
-
-time.sleep(2)    # 약간 대기 시간 주기(빨리 진행 시 에러발생 가능)
-
-# ------------------------------------------ 페이지 나누기
-
-# 현재 페이지
-cur_page = 1
-
-# 크롤링할 페이지 수
-taget_crawl_num = 7
-
-# 엑셀 행 수
-ins_cnt = 1
+time.sleep(3)
 
 
-while cur_page <= taget_crawl_num:
+# Apple 노트북 전체 크롤링
+cur_page, target_crawl_num = 1, 6
 
-    soup = BeautifulSoup(browser.page_source, 'html.parser')
-    # print(soup.prettify())
+idx = 1
 
-    # ------------------------ 확인
+while cur_page <= target_crawl_num:
+    # BeautifulSoup 사용
+    soup = BeautifulSoup(driver.page_source, "html.parser")
 
-    pro_list = soup.select("div.main_prodlist.main_prodlist_list > ul > li")
-    # print(pro_list)
+    # 현재 크롤링 페이지 출력
+    print("*** 현재 페이지 : {}".format(cur_page))
 
-    # 현재 페이지 출력
-    print("**** Current Page : {}".format(cur_page))
+    prod_list = soup.select(
+        ".main_prodlist.main_prodlist_list > ul > li:not(.prod_ad_item):not(.product-pot)"
+    )
+    # print(prod_list)
 
-    # -----------------------  메인 상품 페이지 출력
+    for product in prod_list:
+        # 제품명
+        prod_name = product.select_one(".prod_name > a").text.strip()
+        # 가격
+        prod_price = product.select_one(".price_sect > a").text.strip()
+        # 이미지 주소
+        img = product.select_one(".thumb_image img")
+        if img.get("data-original"):
+            prod_img_src = img.get("data-original")
+        else:
+            prod_img_src = img.get("src")
 
-    for v in pro_list:
-        # 광고 부분에 대해 제거하고 원하는 부분 출력
-        # [0]을 안하면 리스트 구조로 가져오기 때문에 해준 것임
-        if not v.find('div', class_="ad_header"):
-            # 상품명
-            prod_name = v.select('p.prod_name > a')[0].text.strip()
+        if "http:" not in prod_img_src:
+            prod_img_src = "http:" + prod_img_src
 
-            # 이미지
-            img = v.select("a.thumb_link > img")[0]
-            if img.get('data-original'):
-                url = img['data-original']
-            else:
-                url = img['src']
+        print(idx, prod_name, prod_price, prod_img_src)
 
-            # print("img 경로 : {}".format(url))
+        ws1.append([idx, prod_name, prod_price])
 
-            # 403에러 때문에 수정
-            # prod_img = BytesIO(req.urlopen(url).read())
+        idx += 1
 
-            res = requests.get(url, headers={'User-Agent': UserAgent().chrome})
-            prod_img = BytesIO(res.content)
+        # 추출한 이미지 경로를 가지고 이미지 요청 후 가져오기
+        headers = {"user-agent": UserAgent().chrome}
+        response = requests.get(prod_img_src, headers=headers)
+        img_save = BytesIO(response.content)
 
-            # 가격
-            prod_price = v.select('p.price_sect > a')[0].text.strip()
+        img = Image(img_save)
+        img.width = 30
+        img.height = 20
+        ws1.add_image(img, "D" + str(idx))
 
-            # 엑셀 파일 저장
-            worksheet.append([prod_name, prod_price])
-            # 이미지 저장
-            img = openpyxl.drawing.image.Image(prod_img)
-            img.width = 30
-            img.height = 20
-            worksheet.add_image(img, "C"+str(ins_cnt+1))
+    wb.save("./danawa.xlsx")
 
-            ins_cnt += 1
-
-        print()
-    # 페이지 별 스크린 샷 저장
-    # browser.save_screenshot('c:/target_page{}.png'.format(cur_page))
-    workbook.save("./resources/danawa44.xlsx")
-
-    # 현재 페이지 번호 변경
+    # 크롤링 페이지 지정
     cur_page += 1
 
-    if(cur_page > taget_crawl_num):
-        print("Crawling 성공")
+    if cur_page > target_crawl_num:
+        print("크롤링 성공")
         break
 
-    # 다음 페이지 번호 클릭하는 부분(XPATH 로는 에러남)
-    WebDriverWait(browser, 2).until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.number_wrap > a:nth-child({})'.format(cur_page)))).click()
+    # 다음 페이지 번호 클릭
+    WebDriverWait(driver, 2).until(
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ".number_wrap > a:nth-child({})".format(cur_page))
+        )
+    ).click()
 
-    # BeautifulSoup 인스턴스 삭제
+    # 사용했던 soup 객체 제거
     del soup
 
-    # 3초간 대기
+    # 페이지 번호 클릭 후 제품이 보여질 때까지 잠시 기다리기
     time.sleep(3)
-# 브라우저 종료
-browser.close()
 
-# 엑셀 스트림 종료(반드시 필요)
-workbook.close()
+
+time.sleep(3)
+
+driver.close()
