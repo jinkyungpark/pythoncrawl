@@ -52,7 +52,10 @@ try:
     )
     # print(prod_list)
 
-    for idx, product in enumerate(prod_list, 1):
+    # 뒤에 여러 페이지를 크롤링 하면서 번호를 붙여나가야 하기 때문에 enumerate() 사용 안함
+    idx = 1
+
+    for product in prod_list:
         # 제품명
         prod_name = product.select_one(".prod_name > a").text.strip()
         # 가격
@@ -68,6 +71,8 @@ try:
             prod_img_src = "http:" + prod_img_src
 
         print(idx, prod_name, prod_price, prod_img_src)
+
+        idx += 1
 
 except TimeoutException as e:
     print(e)
